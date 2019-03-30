@@ -543,18 +543,103 @@
 
       
         
-          <blockquote>
-<p>MySQL基础操作笔记</p>
-</blockquote>
-          <!--noindex-->
           
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/11/09/2018-11-09-MySQL备忘录/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
+            <a id="more"></a>
+<h4 id="一-MySQL中的基本概念"><a href="#一-MySQL中的基本概念" class="headerlink" title="一. MySQL中的基本概念"></a>一. MySQL中的基本概念</h4><ol>
+<li><strong>表（table）</strong>是一种结构化的文件，用于存储特定类型的数据。在同一个数据库中表名具有唯一性。</li>
+<li><strong>列（column）</strong>是表中的字段，表中的每个字段都有对应的<strong>数据类型type</strong>，它定义了该列中可以存储的数据类型</li>
+<li><strong>行（row）</strong>是指表中的一条条记录（record）</li>
+<li><strong>主键（primary-key）</strong>是表中的一列，其值能够唯一区分表中的每一行。表中任意两行的主键值不能相同（唯一性），每一行都必须要有一个主键值（主键列不能为NULL值），不要在主键中使用可能会改变的值</li>
+<li><strong>SQL</strong>（Structured-Query-Language）结构化查询语言，专门用于和数据库通信，从数据库中读写数据</li>
+</ol>
+<p><img src="https://znker-blog.oss-cn-hangzhou.aliyuncs.com/db/mysql/mysql_190222001.png" alt></p>
+<h4 id="二-简单查询语句"><a href="#二-简单查询语句" class="headerlink" title="二. 简单查询语句"></a>二. 简单查询语句</h4><ol>
+<li><p>检索指定列：在需要检索表中指定列的数据的时候，只需要指定<strong>列名</strong>和<strong>表名</strong>即可</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 指定表名，多个列之间使用逗号隔开</span></span><br><span class="line"><span class="keyword">SELECT</span> prod_id, prod_name, prod_price <span class="keyword">FROM</span> products;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检索所有列：使用<strong>通配符（*）</strong>可以检索表中所有列的数据，一般与where子句搭配使用，检索指定记录（record）的全部字段值，否则就是检索全表数据了</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 检索全表数据</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> products;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>限制结果：当符合条件的检索结果有很多条记录的时候（例如全表数据），为了前端可以分页展示查询结果，可以使用LIMIT子句。<strong>LIMIT子句</strong>可以指定开始行和本次检索需要展示的记录数，这是mysql中<strong>分页查询</strong>的基本原理。LIMIT子句在sql查询语句的末尾，逻辑是先查询出所有符合条件的记录，然后再分页返回数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 检索结果的第一行是0而不是1</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> products <span class="keyword">LIMIT</span> <span class="number">5</span>,<span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>排序检索：<strong>ORDER BY 子句</strong>可以对检索出的结果按指定列column进行排序，同时还可以指定排序方向，默认是升序的，使用<strong>DESC关键字</strong>可以指定降序排列</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 按多个列进行排序，先按第一个字段值进行排序，</span></span><br><span class="line"><span class="comment">## 第一个字段值相同的时候再按第二个字段值排序</span></span><br><span class="line"><span class="keyword">SELECT</span> prod_id, prod_price, prod_name <span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_price <span class="keyword">DESC</span>, prod_name;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="三-过滤数据"><a href="#三-过滤数据" class="headerlink" title="三. 过滤数据"></a>三. 过滤数据</h4><p>在使用mysql进行查询的时候通常只需要检索出指定行的记录而不是全表记录，此时可以使用<strong>where子句</strong>设置检索条件（criteria）来过滤数据。where子句除了能做等值查询（eg.检索指定id的记录）也能做范围查询（&gt;= , &lt;  , between，!= …）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 等值检索</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> products <span class="keyword">WHERE</span> prod_price = <span class="number">2.5</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 小于等于</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> products <span class="keyword">WHERE</span> prod_price &lt;= <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">## 范围检索，指定开始值和结束值</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> products <span class="keyword">WHERE</span> prod_price <span class="keyword">BETWEEN</span> <span class="number">5</span> <span class="keyword">AND</span> <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+<p>可以使用<strong>逻辑操作符（AND / OR）</strong>来组合where子句建立高级检索条件（多条件组合查询），SQL在处理OR操作符之前会优先处理AND操作符，为了避免出现歧义，可以使用括号：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## AND关键字指示mysql只返回满足所有条件的记录</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> products <span class="keyword">WHERE</span> vend_id = <span class="number">1003</span> <span class="keyword">AND</span> prod_price &lt;= <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">## OR关键字指示mysql检索出满足任一条件的记录</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> products <span class="keyword">WHERE</span> vend_id = <span class="number">1002</span> <span class="keyword">OR</span> vend_id = <span class="number">1003</span>;</span><br></pre></td></tr></table></figure>
+<p>在where子句中可以使用<strong>IN操作符</strong>来指定检索条件值得范围，此外IN操作符可以包含select语句，这样就可以实现子查询功能。相反，<strong>NOT操作符</strong>否定它之后跟的任何条件</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## IN操作符，在mybatis中前端可以传一个数组过来，后台用List封装后传给mybatis</span></span><br><span class="line"><span class="keyword">SELECT</span> prod_name, prod_price <span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> vend_id <span class="keyword">IN</span> (<span class="number">1002</span>, <span class="number">1003</span>) <span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_name;</span><br></pre></td></tr></table></figure>
+<p>使用<strong>通配符（%）和LIKE操作符</strong>可以对指定字段进行模糊查询，通配符（%）表示任意字符出现任意次数</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 使用通配符进行模糊查询</span></span><br><span class="line"><span class="keyword">SELECT</span> prod_id, prod_name <span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> prod_name <span class="keyword">LIKE</span> <span class="string">"%anvil%"</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="四-数据分组"><a href="#四-数据分组" class="headerlink" title="四. 数据分组"></a>四. 数据分组</h4><p>分组允许将数据分为多个逻辑组，以便能对每个组进行聚集计算，创建逻辑分组使用GROUP BY子句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 将产品按供应商id进行逻辑分组，然后分别统计每个分组的数据量</span></span><br><span class="line"><span class="keyword">SELECT</span> vend_id, <span class="keyword">COUNT</span>(*) <span class="keyword">AS</span> num_prods</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> vend_id;</span><br></pre></td></tr></table></figure>
+<p>MySQL还允许使用HAVING子句过滤分组，与where子句不同的是，where子句是对行过滤而HAVING子句是对分组过滤</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 统计订单数大于等于2的用户id</span></span><br><span class="line"><span class="keyword">SELECT</span> cust_id, <span class="keyword">COUNT</span>(*) <span class="keyword">AS</span> orders</span><br><span class="line"><span class="keyword">FROM</span> orders</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> cust_id</span><br><span class="line"><span class="keyword">HAVING</span> <span class="keyword">COUNT</span>(*) &gt;= <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="五-联结查询（很难很重要）"><a href="#五-联结查询（很难很重要）" class="headerlink" title="五. 联结查询（很难很重要）"></a>五. 联结查询（很难很重要）</h4><p>SQL最强大的功能之一就是在使用select进行数据检索时执行<strong>表联结（join）</strong>，但是在互联网应用中很多时候不建议使用联结查询，因为数据量很大（千万级）的时候联结查询会使数据库性能直线下降，在数据库设计的时候尽量是单表的curd，在coding的时候可以使用多次查询数据库代替联结查询。而且在分库分表的架构设计中有的时候表不在同一个数据库中根本无法进行联结查询。</p>
+<p>关系型数据库中的表是关系表，它将信息分散在多个表中存储以减少信息冗余（例如订单表中不需要存储客户信息，只需要存储一个客户主键值作为外键用于关联用户表）。关系表使用<strong>外键</strong>来定义两个表之间的关系，外键是表中的一列它的值是另一张表中的主键。</p>
+<p>创建联结：指定需要联结的表和关联条件</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 关联了两张表，外键为关联条件</span></span><br><span class="line"><span class="keyword">SELECT</span> vend_name, prod_name, prod_price</span><br><span class="line"><span class="keyword">FROM</span> vendors, products						<span class="comment"># 需要联结的表</span></span><br><span class="line"><span class="keyword">WHERE</span> vendors.vend_id = products.vend_id	<span class="comment"># 联结的条件</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> vend_name, prod_name;</span><br></pre></td></tr></table></figure>
+<p>在联结两张表的时候，实际上是将第一张表中的每一行与第二张表中每一行配对，而where子句作为过滤条件用于过滤出只包含那些匹配联结条件的行，如果联结的时候没有给定where子句将返回笛卡尔积</p>
+<p>当两张表联结的时候可以使用<strong>内联结</strong>语法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 内联结</span></span><br><span class="line"><span class="keyword">SELECT</span> vend_name, prod_name, prod_price</span><br><span class="line"><span class="keyword">FROM</span> vendors <span class="keyword">INNER</span> <span class="keyword">JOIN</span> products</span><br><span class="line"><span class="keyword">ON</span> vendors.vend_id = products.vend_id</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> vend_name;</span><br></pre></td></tr></table></figure>
+<p>多表关联查询：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 业务需求：查询购买商品'TNT2'的用户信息，字段prod_id在orderitems表中</span></span><br><span class="line"><span class="keyword">SELECT</span> cust_name, cust_contact</span><br><span class="line"><span class="keyword">FROM</span> customers, orders, orderitems</span><br><span class="line"><span class="keyword">WHERE</span> customers.cust_id = orders.cust_id</span><br><span class="line">	<span class="keyword">AND</span> orders.order_num = orderitems.order_num</span><br><span class="line">	<span class="keyword">AND</span> prod_id = <span class="string">'TNT2'</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>外联结</strong>：有的时候联结需要关联那些在相关表中没有关联行的行，例如统计用户下单数的时候需要关联那些尚未下单的客户，此时使用内联结的时候结果将不包括未下单的客户。左外联结查询是将左表中的每一行与右表中每一行匹配，再通过联结条件过滤出指定的行，如果右表中没有与左表中指定的行关联，则左表指定行关联null值</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 左外联结查询，如果右表中没有与左表中关联的行，</span></span><br><span class="line"><span class="comment">## 则左表中关联值为NULL</span></span><br><span class="line"><span class="keyword">SELECT</span> customers.cust_id, order_num </span><br><span class="line"><span class="keyword">FROM</span> customers <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> orders</span><br><span class="line"><span class="keyword">ON</span> customers.cust_id = orders.cust_id;</span><br><span class="line"></span><br><span class="line"><span class="comment">## 带有聚集函数的联结，统计用户下单数，包括尚未下单的用户</span></span><br><span class="line"><span class="keyword">SELECT</span> customers.cust_name, customers.cust_id, </span><br><span class="line"><span class="keyword">COUNT</span>(orders.order_num) <span class="keyword">AS</span> num_order</span><br><span class="line"><span class="keyword">FROM</span> customers <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> orders</span><br><span class="line"><span class="keyword">ON</span> customers.cust_id = orders.cust_id</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> customers.cust_id;</span><br></pre></td></tr></table></figure>
+<h4 id="六-增删改操作"><a href="#六-增删改操作" class="headerlink" title="六. 增删改操作"></a>六. 增删改操作</h4><p>INSERT 语句用于向表中插入记录，如果在insert语句省略了某些列，恰好该列不允许NULL值或者没有给定默认值，则mysql将返回一条错误信息，但是oop编程中一般都是插入一整条记录</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 字段名称和字段值位置必须一一对应</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> customers(cust_name,cust_contact,cust_email,cust_address,cust_city,</span><br><span class="line">cust_state,cust_zip,cust_country) <span class="keyword">VALUES</span>(<span class="string">'Pep E. LaPew'</span>,<span class="literal">NULL</span>,<span class="literal">NULL</span>,<span class="string">'100 Main Street'</span>,</span><br><span class="line"><span class="string">'Los Angeles'</span>,<span class="string">'CA'</span>,<span class="string">'90046'</span>,<span class="string">'USA'</span>);</span><br></pre></td></tr></table></figure>
+<p>UPDATE 语句用于更新表中记录，<strong>使用update语句时一定不能丢失where子句！</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 在更新前先查询记录，然后根据需要更新数据</span></span><br><span class="line"><span class="comment">## mybatis在执行update之前一般先查询原始record然后根据需求替换属性，最后将所有数据update到数据库</span></span><br><span class="line"><span class="keyword">UPDATE</span> customers <span class="keyword">SET</span> cust_name = <span class="string">'The Fudds'</span>, cust_email = <span class="string">'elemer@fudd.com'</span></span><br><span class="line"><span class="keyword">WHERE</span> cust_id = <span class="number">10005</span>;</span><br></pre></td></tr></table></figure>
+<p>DELETE 语句用于删除表中记录，<strong>使用delete语句时切记不能丢失where子句，否则只能跑路了！</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> customers <span class="keyword">WHERE</span> cust_id = <span class="number">10006</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="七-创建表"><a href="#七-创建表" class="headerlink" title="七. 创建表"></a>七. 创建表</h4><p>创建表一般有两种方法：一种是使用Navicate之类的可视化交互工具操作，另一种就是mysql命令行了</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`customers`</span> (</span><br><span class="line">  <span class="string">`cust_id`</span> 		<span class="built_in">int</span>(<span class="number">11</span>) 	<span class="keyword">NOT</span> <span class="literal">NULL</span> 	AUTO_INCREMENT,</span><br><span class="line">  <span class="string">`cust_name`</span> 		<span class="built_in">char</span>(<span class="number">50</span>) 	<span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`cust_address`</span> 	<span class="built_in">char</span>(<span class="number">50</span>) 	<span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`cust_city`</span> 		<span class="built_in">char</span>(<span class="number">50</span>) 	<span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`cust_state`</span> 		<span class="built_in">char</span>(<span class="number">5</span>) 	<span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`cust_zip`</span> 		<span class="built_in">char</span>(<span class="number">10</span>) 	<span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`cust_country`</span> 	<span class="built_in">char</span>(<span class="number">50</span>) 	<span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`cust_contact`</span> 	<span class="built_in">char</span>(<span class="number">50</span>) 	<span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`cust_email`</span> 		<span class="built_in">char</span>(<span class="number">255</span>) 	<span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`cust_id`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span></span><br></pre></td></tr></table></figure>
+<p>在创建表的sql语句中主要做了一下设定：</p>
+<ul>
+<li>指定列名称column</li>
+<li>指定列中存储的数据的类型type</li>
+<li>指定列中的值是否可以是null，或者指定列的默认值，允许null值的列在插入数据的时候可以不给定值</li>
+<li>指定表中的主键列primary key，同时可以指定主键为自增auto_increment，那么主键值将由数据库生成，应用层插入数据的时候无需手动指定主键值</li>
+</ul>
+<p><strong>引擎类型</strong>：mysql中有一个具体管理和处理数据的内部引擎，在mysql中打包了多个引擎，它们功能不同，在使用的时候要注意区别：</p>
+<ul>
+<li>InnoDB：具有可靠的事务处理的引擎，但不支持全文检索，可以作为读写分离中的只写数据库</li>
+<li>MyISAM：一个高性能的引擎，支持全文检索但不支持事务处理，可以作为只读数据库</li>
+<li>MEMORY：与MyISAM类似，但它的数据是在内存中而不是磁盘中，速度很快，适合用作临时表</li>
+</ul>
+<h4 id="八-MySQL中的数据类型"><a href="#八-MySQL中的数据类型" class="headerlink" title="八. MySQL中的数据类型"></a>八. MySQL中的数据类型</h4><p>数据类型主要有两个作用：</p>
+<ul>
+<li>限制该列column中可以存储的数据的类型，如果插入不兼容的数据类型mysql将会报错，例如试图在char类型的数据列中插入int类型的数据将会报错</li>
+<li>数据类型允许mysql在内部更加有效地存储数据</li>
+</ul>
+<p>常见的数据类型有：串数据类型、数值数据类型、日期和时间类型</p>
+<p><strong>串数据类型</strong>：串类型的数据在sql语句中必须使用单引号括起来，这是和数值类型的区别</p>
+<ul>
+<li>char：1~255个字符的定长串，它的长度在创建时必须指定，例如char(20)</li>
+<li>varchar：长度可变，最多不超过255个字节，在创建的时候指定为varchar(n)，则可存储0~n个字符的可变长度串</li>
+<li>text：最大长度为64k的可变长度文本</li>
+</ul>
+<p>一些看似数值类型的数据其实应该以串存储更加方便，比如电话号码，而一些以0开头的数据如果以数值存储将丢失开头的0</p>
+<p><strong>数值类型</strong>：mysql中数值类型的数据默认是有符号的，可以存储正负数</p>
+<ul>
+<li>int：存储整数值，范围大概是正负21亿</li>
+<li>bigint：存储整数值，范围是天文数字大概几百亿亿的样子….对应java中的long类型</li>
+<li>double：双精度浮点值，可用于存储小数</li>
+<li>decimal：精度可变的浮点值</li>
+</ul>
+<p><strong>日期和时间数据类型</strong>：</p>
+<ul>
+<li>date：表示1000-01-01 ~ 9999-12-31的日期，格式为YYYY-MM-DD</li>
+<li>time：格式为HH:MM:SS</li>
+<li>datetime：是date和time的组合</li>
+</ul>
+<p><strong>二进制数据类型</strong>：可用于存储图像、多媒体文件、文档，常见的数据类型是blog，最大长度是64k，这种设计非常不推荐，应该果断抛弃，图像文档等数据应该存储在文件服务器中，而不是数据库，数据库中应该存储的是这些文件的链接用于访问</p>
+
           
-          <!--/noindex-->
         
       
     </div>
