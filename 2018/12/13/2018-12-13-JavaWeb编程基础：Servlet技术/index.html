@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Servlet技术是javaweb编程的核心，它用于处理客户端的请求与响应">
+<meta name="keywords" content="JavaWeb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaWeb编程基础：Servlet技术">
+<meta property="og:url" content="http://yoursite.com/2018/12/13/2018-12-13-JavaWeb编程基础：Servlet技术/index.html">
+<meta property="og:site_name" content="Java杂货铺">
+<meta property="og:description" content="Servlet技术是javaweb编程的核心，它用于处理客户端的请求与响应">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://znker-blog.oss-cn-hangzhou.aliyuncs.com/javaweb/javaweb_190223_001.png">
+<meta property="og:updated_time" content="2019-04-02T18:19:06.872Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaWeb编程基础：Servlet技术">
+<meta name="twitter:description" content="Servlet技术是javaweb编程的核心，它用于处理客户端的请求与响应">
+<meta name="twitter:image" content="https://znker-blog.oss-cn-hangzhou.aliyuncs.com/javaweb/javaweb_190223_001.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2018/12/13/2018-12-13-JavaWeb编程基础：Servlet技术/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>JavaWeb编程基础：Servlet技术 | Java杂货铺</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Java杂货铺</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <a href="https://github.com/codeznker" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/13/2018-12-13-JavaWeb编程基础：Servlet技术/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="孤影">
+      <meta itemprop="description" content="用双手成就梦想！">
+      <meta itemprop="image" content="http://znker-blog.oss-cn-hangzhou.aliyuncs.com/jekyll/v2-2bc86fa2732c0d4ace22d97577164789_hd.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Java杂货铺">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaWeb编程基础：Servlet技术
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-13 00:00:00" itemprop="dateCreated datePublished" datetime="2018-12-13T00:00:00+08:00">2018-12-13</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Servlet技术是javaweb编程的核心，它用于处理客户端的请求与响应</p>
+</blockquote>
+<a id="more"></a>
+<h4 id="一-JavaWeb开发中的基本概念"><a href="#一-JavaWeb开发中的基本概念" class="headerlink" title="一. JavaWeb开发中的基本概念"></a>一. JavaWeb开发中的基本概念</h4><p>1996年Sun公司发布了Java Servlet技术，该技术后来成为在Web应用中生成动态内容的标准。Servlet是运行在服务端的java类，用于处理客户端的http请求并作出响应html，运行在服务端的servlet接收由servlet容器（tomcat/jetty）转发的针对指定URL的请求（HttpRequest），web应用程序使用web.xml或者注解映射URL和servlet之间的关系。起初的servlet响应是全部写在servlet程序中的，使用PrintWriter对象将html响应页面的内容一行行地写回客户端（html），这要求java程序员需要精通网页编程技术，同时由于硬编码使得debug非常困难。JavaServer Pages（jsp）技术的出现改变了这一现状，jsp本质还是servlet，jsp技术允许在html文档中嵌入java脚本程序用于动态生成需要查询数据库的内容，这样使得页面中的静态资源（html/text/image/href…）和动态内容得以分离，静态资源直接写在html模板内，而动态内容查询数据库之后使用jsp标签（EL）渲染到模板页面中。Servlet和JSP程序需要部署在servlet/jsp容器中才能运行，常见的servlet/jsp容器有tomcat和jetty，servlet容器和客户端（browser/app）之间使用HTTP协议进行通信。</p>
+<h4 id="二-Servlet接口"><a href="#二-Servlet接口" class="headerlink" title="二. Servlet接口"></a>二. Servlet接口</h4><p>Servlet api是javaweb开发技术的基础，它的核心是Servlet接口。Servlet接口是servlet容器和servlet程序之间的一种“契约”，它约定servlet容器会加载servlet类到内存中（init），当servlet容器接收到客户端针对特定URL的http请求时，容器会调用该servlet类中的方法（service）去处理请求并作出响应。在servlet容器将http请求转发给servlet程序之前，servlet容器会事先创建一个ServletRequest和ServletResponse对象，其中servlet容器解析了http请求报文的原始数据，并将解析后的数据封装到ServletRequest对象中，开发者调用ServletRequest对象中的方法即可获取相应的请求信息和请求参数parameter，而ServletResponse对象则代表了servlet程序对http请求的响应（html/json…），它封装了响应的复杂性。</p>
+<p>Servlet接口中的方法，这些方法都是由servlet容器调用的，这些方法也是servlet生命周期方法：</p>
+<ul>
+<li><strong>init</strong>：当第一次请求servlet时，servlet容器会调用该方法初始化servlet对象到内存当中，在调用这个方法的时候servlet容器还会传递一个ServletConfig对象给该方法，ServletConfig对象中封装了servlet的初始化参数，这些初始化参数定义在web.xml或者注解中</li>
+<li><strong>service</strong>：该方法用于处理客户端请求，每次请求servlet的时候，容器都会调用这个方法，同时传递给service方法两个对象参数：ServletRequest &amp; ServletResponse，service方法从ServletRequest对象中获取请求参数，然后调用web应用中的javabean组件操作数据库并完成业务逻辑，将需要返回的结果对象寄存在request请求作用域中，然后将http请求转发给jsp模板页面用于页面渲染返回结果。如果想要返回JSON格式的数据，则调用json序列化工具（Jackson）将返回的结果序列化之后由ServletResponse对象直接写回客户端。</li>
+<li><strong>destroy</strong>：当应用程序卸载或者servlet容器关闭的时候由servlet容器调用，释放系统资源。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用注解开发Servlet而不是web.xml</span></span><br><span class="line"><span class="comment">// @WebServlet注解表示这个类是一个Servlet，urlPatterns元素告知servlet容器匹配请求的URL</span></span><br><span class="line"><span class="meta">@WebServlet</span>(name = <span class="string">"MyServlet"</span>, urlPatterns = &#123;<span class="string">"/my"</span>&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyServlet</span> <span class="keyword">implements</span> <span class="title">Servlet</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> ServletConfig servletConfig;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(ServletConfig servletConfig)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.servletConfig = servletConfig;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(ServletRequest request, ServletResponse response)</span></span></span><br><span class="line"><span class="function">            <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        String servletName = servletConfig.getServletName();</span><br><span class="line">        <span class="comment">// 设置响应的格式为html页面，并指定页面编码格，默认是ISO-8859-1，中文会乱码</span></span><br><span class="line">        response.setContentType(<span class="string">"text/html;charset=utf-8"</span>);</span><br><span class="line">        <span class="comment">// PrintWriter对象，用于将响应的html页面发送到客户端</span></span><br><span class="line">        PrintWriter writer = response.getWriter();</span><br><span class="line">        <span class="comment">// 设置HTTP请求响应的内容，其中servletName为动态获取的</span></span><br><span class="line">        writer.print(<span class="string">"&lt;html&gt;&lt;head&gt;&lt;/head&gt;"</span> + <span class="string">"&lt;body&gt;Hello from "</span> + servletName</span><br><span class="line">            + <span class="string">"&lt;/body&gt;&lt;/html&gt;"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServletConfig <span class="title">getServletConfig</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> servletConfig;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getServletInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"My Servlet"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>javaweb应用具有特定的目录结构，其中<code>WEB-INF</code>目录下的资源不能被客户端直接访问，只能由web程序内部访问。web应用的部署：将整个应用程序打包为war格式，然后复制到tomcat的webapps目录下，然后启动tomcat即可，也可以使用IDE配置tomcat自动部署。</p>
+<p>在浏览器中输入<a href="http://http://localhost:8080/my，查看返回的页面源码正是servlet中PrintWriter对象输出的内容，这样就完成了一次http的请求和响应过程" target="_blank" rel="noopener">http://http://localhost:8080/my，查看返回的页面源码正是servlet中PrintWriter对象输出的内容，这样就完成了一次http的请求和响应过程</a></p>
+<p><img src="https://znker-blog.oss-cn-hangzhou.aliyuncs.com/javaweb/javaweb_190223_001.png" alt></p>
+<h4 id="三-ServletRequest"><a href="#三-ServletRequest" class="headerlink" title="三. ServletRequest"></a>三. ServletRequest</h4><p>对于每一个http请求，servlet容器都会创建一个ServletRequest对象传递个servlet的service方法，servlet容器解析了http请求中的原始请求数据（请求头信息&amp;请求参数parameter），servlet容器将解析后的数据封装到了ServletRequest对象中，其中最重要的就是请求参数。<strong>getParameter()</strong>方法可以获取表单域（form）中的请求参数值，也可以获取查询字符串的值Query，例如对于<a href="http://localhost:8080/role?id=233请求，如果参数名不存在则返回null" target="_blank" rel="noopener">http://localhost:8080/role?id=233请求，如果参数名不存在则返回null</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet</span>(name = <span class="string">"roleServlet"</span>, urlPatterns = &#123;<span class="string">"/role"</span>&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RoleServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></span><br><span class="line"><span class="function">            <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="comment">// 使用getParameter方法获取查询字符串的值</span></span><br><span class="line">        String roleId = request.getParameter(<span class="string">"id"</span>);</span><br><span class="line">        System.out.println(roleId);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ServletRequest对象中的那些重要方法：</p>
+<ul>
+<li>setAttribute() / getAttribute() / removeAttribute()：ServletRequest本身是一个作用域，该对象可以用于存储键值对key-value类型的数据，该作用域的范围仅限于一次请求响应过程中，因为在service方法结束后，request对象将被jvm垃圾回收掉，而Request域中的对象也会被销毁</li>
+<li>getContentType：获取http请求体中的类型，比如在上传图片的时候就可能是 image/png</li>
+<li>getInputStream：从请求体中获取二进制的数据，结果返回一个ServletInputStream对象</li>
+<li>getParameter( java.lang.String  name )：获取指定名称的请求参数的值</li>
+<li>getRequestDispatcher( java.lang.String  path )：获取一个请求转发器对象，该对象中封装了转发的地址</li>
+</ul>
+<p>ServletRequest最重要的作用是该对象中封装了请求信息和参数，在service方法中可以使用这些数据！</p>
+<h4 id="四-ServletResponse"><a href="#四-ServletResponse" class="headerlink" title="四. ServletResponse"></a>四. ServletResponse</h4><p>Servlet容器在调用servlet的service方法之前会创建一个ServletResponse对象用于表示对于http请求的响应，该对象隐藏了将响应发送给客户端的复杂性。在jsp出现之前，如果响应格式是html页面，则需要手动调用<strong>getWriter</strong>方法获取PrintWriter对象后将页面一行行写回到客户端！如果响应格式是二进制数据（文件下载），使用<strong>getOutStream</strong>方法获取一个输出流对象。jsp技术出现之后，在service方法完成业务逻辑返回结果之后，可以将结果对象存放到request作用域中，然后将请求转发给jsp页面，而将响应页面发送到客户端的过程将由jsp编译之后的servlet默认执行。</p>
+<p>ServletResponse对象中的那些重要方法：</p>
+<ul>
+<li>getWriter：该方法返回一个java.io.PrintWriter对象，该对象可以将响应结果的html页面写回客户端</li>
+<li>getOutputStream：该方法返回一个输出流对象，用于处理二进制文件下载，比如图片、文档….</li>
+<li>setContentType：因为PrintWriter对象默认的编码格式是IOS-8859-1，在处理中文响应的时候需要手动设置编码格式为utf-8，否则会出现页面中文乱码问题</li>
+</ul>
+<h4 id="五-ServletConfig"><a href="#五-ServletConfig" class="headerlink" title="五. ServletConfig"></a>五. ServletConfig</h4><p>在servlet容器初始化servlet时，会给servlet的init方法传递一个ServletConfig对象，该对象中封装了servlet的初始化参数，这些参数是通过<code>@WebServlet</code> 或者web.xml部署描述符设定的。这些参数也是用键值对存储，这些参数在整个servlet生命周期中都可以调用。ServletConfig的另一个重要的方法是<strong>getServletContext()</strong>，该方法用于在servlet内获取与servlet关联的ServletContext对象！</p>
+<h4 id="六-ServletContext"><a href="#六-ServletContext" class="headerlink" title="六. ServletContext"></a>六. ServletContext</h4><p>ServletContext对象表示web应用程序的上下文，每个web应用程序只有一个context，在servlet容器初始化web应用的时候就会创建这个对象，ServletConfig对象的<strong>getServletConfig()</strong>方法可以获取这个对象。因为ServletContext作用域为整个web应用生命周期，所以它可以跨servlet存储数据。</p>
+<h4 id="七-HttpServlet"><a href="#七-HttpServlet" class="headerlink" title="七. HttpServlet"></a>七. HttpServlet</h4><p>HttpServlet类继承了GenericServlet抽象类，并且覆盖了service方法，传递给service方法的对象变成HttpServletRequest和HttpServletResponse，在HttpServlet中无需重写service方法，只需要重写doGet，doPost方法就可以处理HTTP请求，细节可查看源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(ServletRequest req, ServletResponse res)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">	HttpServletRequest  request;</span><br><span class="line">	HttpServletResponse response;</span><br><span class="line">    <span class="comment">// 类型校验</span></span><br><span class="line">	<span class="keyword">if</span> (!(req <span class="keyword">instanceof</span> HttpServletRequest &amp;&amp; </span><br><span class="line">          res <span class="keyword">instanceof</span> HttpServletResponse)) &#123;</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> ServletException(<span class="string">"non-HTTP request or response"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">// 向下转型总是会成功的</span></span><br><span class="line">	request = (HttpServletRequest) req;</span><br><span class="line">	response = (HttpServletResponse) res;</span><br><span class="line">	<span class="comment">// 调用HttpServlet自定义的service(HttpServletRequset，HttpServletResponse)</span></span><br><span class="line">    service(request, response);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于Http类型的请求，servlet容器还是会调用原始的service方法，但是会在该方法中对request和response对象进行向下的类型转换，然后调用HttpServlet中自定义的service方法，与GenericServlet不同的是对于HttpServlet对象只需要重写doGet/doPost方法就可以处理对应的Get/Post类型的http请求</p>
+<p><strong>HttpServletRequst</strong>对象中多了几个针对http类型请求的方法：</p>
+<ul>
+<li>getContextPath：获取请求路径的URI</li>
+<li>getCookies：获取http请求中的所有Cookie对象，返回值为一个Cookie类型的数组</li>
+<li>getSession：获取http请求关联的HttpSession对象，如果不存在就创建一个新的</li>
+</ul>
+<p><strong>HttpServletResponse</strong>：</p>
+<ul>
+<li>addCookie ( Cookie cookie )：向http响应中添加一个Cookie对象用于跟踪用户状态</li>
+<li>sendRedirect ( String location)：重定向，参数可以是一个绝对路径或者相对路径</li>
+</ul>
+<h4 id="八-web-xml部署描述符"><a href="#八-web-xml部署描述符" class="headerlink" title="八. web.xml部署描述符"></a>八. web.xml部署描述符</h4><p>以上案例使用的都是<code>@WebServlet</code> 注解标识Servlet，也可以使用web.xml来配置Servlet的映射关系以及初始化参数等信息</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">xmlns</span>=<span class="string">"http://java.sun.com/xml/ns/javaee"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://java.sun.com/xml/ns/javaee</span></span></span><br><span class="line"><span class="tag"><span class="string">	      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">version</span>=<span class="string">"3.0"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 指定servlet的名称和路径 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>contextServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>com.znker.servlet.ContextServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 这个值大于0的时候表示服务器在启动的时候就会初始化这个servlet而不是客户端第一次访问 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>10<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 配置servlet的映射路径，指定什么URL交由该servlet处理 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>contextServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/servletContext<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="九-Session管理"><a href="#九-Session管理" class="headerlink" title="九. Session管理"></a>九. Session管理</h4><p>HTTP协议是无状态的，在默认状态下，web服务器不知道一个http请求是来自用户首次访问还是来自之前已经访问过的用户，因此需要一种状态来保持用户状态。</p>
+<p><strong>Cookie</strong>：</p>
+<p>Cookie是自动地在web服务器和浏览器之间来回传递的一小块信息，cookie是作为http信息头嵌入的，因此它的传输过程由http协议处理，在服务端可以根据需求设置客户端cookie有效期限。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建Cookie对象</span></span><br><span class="line">Cookie cookie = <span class="keyword">new</span> Cookie(cookie_name, value);</span><br><span class="line"><span class="comment">// 将Cookie发送到浏览器</span></span><br><span class="line"><span class="comment">// 当浏览器再次发出对同一资源或者同一台服务器中的不同资源的请求时，它会同时把从服务端发来的cookie</span></span><br><span class="line"><span class="comment">// 在发送回去</span></span><br><span class="line">httpServletResponse.addCookie(cookie);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在服务端访问客户端发来的Cookie中的信息</span></span><br><span class="line">Cookie[] cookies = request.getCookies();</span><br><span class="line">Cookie maxRecordsCookie = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">if</span>(cookies != <span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="comment">// 迭代Cookie数组</span></span><br><span class="line">    <span class="keyword">for</span>(Cookie cookie : cookies) &#123;</span><br><span class="line">        <span class="keyword">if</span>(cookie.getName().equals(<span class="string">"maxRecords"</span>)) &#123;</span><br><span class="line">            maxRecordsCookie = cookie;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Cookie类中没有可以直接删除cookie的方法，可以创建一个同名的Cookie去替换客户端的cookie</span></span><br><span class="line">Cookie cookie = <span class="keyword">new</span> Cookie(<span class="string">"login"</span>, <span class="string">""</span>);</span><br><span class="line">cookie.setMaxAge(<span class="number">0</span>);</span><br><span class="line">response.addCookie(cookie);</span><br></pre></td></tr></table></figure>
+<p><strong>HttpSession</strong>：</p>
+<p>HttpSession是当用户第一次访问某个网站的时候servlet容器自动创建的，通过在HttpRequest中调用<strong>getSession</strong>方法，可以获取用户的HttpSession，如果当前用户已经有与之关联的HttpSession了就返回这个对象，如果没有就创建一个新的HttpSession. 在HttpSession中可以用于存储键值对，这些信息是保存在服务端内存中的。</p>
+<p>Servlet容器为它所创建的每一个HttpSession生成一个唯一的标识符，并将这个标识符作为一个token发送到浏览器，一般是作为一个名为JSESSIONID的cookie，在后续的请求中，浏览器会将这个Cookie发送回服务端，服务端通过解析这个HttpSession来确定是哪个用户发送的请求，HttpSession的发送和解析是由servlet容器自动完成的。为了使HttpSession强制过期，可以调用invalidate方法，用户退出登录状态的时候就可以调用这个方法。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaWeb/" rel="tag"># JavaWeb</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/03/2018-12-03-Spring基础：依赖注入/" rel="next" title="Spring基础：依赖注入">
+                <i class="fa fa-chevron-left"></i> Spring基础：依赖注入
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/05/2019-01-05-MyBatis基础：组件与配置/" rel="prev" title="MyBatis基础：组件与配置">
+                MyBatis基础：组件与配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://znker-blog.oss-cn-hangzhou.aliyuncs.com/jekyll/v2-2bc86fa2732c0d4ace22d97577164789_hd.jpg" alt="孤影">
+            
+              <p class="site-author-name" itemprop="name">孤影</p>
+              <div class="site-description motion-element" itemprop="description">用双手成就梦想！</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/codeznker" title="GitHub &rarr; https://github.com/codeznker" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="mailto:codeznker@aliyun.com" title="E-Mail &rarr; mailto:codeznker@aliyun.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zhang-xiao-mu.blog/" title="https://zhang-xiao-mu.blog/" rel="noopener" target="_blank">张小木</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一-JavaWeb开发中的基本概念"><span class="nav-number">1.</span> <span class="nav-text">一. JavaWeb开发中的基本概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二-Servlet接口"><span class="nav-number">2.</span> <span class="nav-text">二. Servlet接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三-ServletRequest"><span class="nav-number">3.</span> <span class="nav-text">三. ServletRequest</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四-ServletResponse"><span class="nav-number">4.</span> <span class="nav-text">四. ServletResponse</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五-ServletConfig"><span class="nav-number">5.</span> <span class="nav-text">五. ServletConfig</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#六-ServletContext"><span class="nav-number">6.</span> <span class="nav-text">六. ServletContext</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#七-HttpServlet"><span class="nav-number">7.</span> <span class="nav-text">七. HttpServlet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#八-web-xml部署描述符"><span class="nav-number">8.</span> <span class="nav-text">八. web.xml部署描述符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#九-Session管理"><span class="nav-number">9.</span> <span class="nav-text">九. Session管理</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">孤影</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
