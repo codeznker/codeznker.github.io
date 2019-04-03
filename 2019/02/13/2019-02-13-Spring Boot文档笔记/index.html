@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="Spring Boot是目前非常流行的微服务框架，它倡导”约定优于配置”的理念，其设计目的就是为了简化Spring应用初始化搭建及开发过程，一个产品级的应用往往只需要极少Spring Boot配置就能运行起来  一. Spring Boot 初相识Spring Boot使你能够创建独立的、可运行的产品级应用。Spring Boot对Spring生态中的第三方库进行了打包，使得开发者使用很少的配置">
+  <meta name="description" content="Spring Boot是目前非常流行的微服务框架，它倡导”约定优于配置”的理念，其设计目的就是为了简化Spring应用初始化搭建及开发过程，一个产品级的应用往往只需要极少Spring Boot配置就能运行起来">
 <meta name="keywords" content="Spring Boot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring Boot文档笔记">
 <meta property="og:url" content="http://yoursite.com/2019/02/13/2019-02-13-Spring Boot文档笔记/index.html">
 <meta property="og:site_name" content="Java杂货铺">
-<meta property="og:description" content="Spring Boot是目前非常流行的微服务框架，它倡导”约定优于配置”的理念，其设计目的就是为了简化Spring应用初始化搭建及开发过程，一个产品级的应用往往只需要极少Spring Boot配置就能运行起来  一. Spring Boot 初相识Spring Boot使你能够创建独立的、可运行的产品级应用。Spring Boot对Spring生态中的第三方库进行了打包，使得开发者使用很少的配置">
+<meta property="og:description" content="Spring Boot是目前非常流行的微服务框架，它倡导”约定优于配置”的理念，其设计目的就是为了简化Spring应用初始化搭建及开发过程，一个产品级的应用往往只需要极少Spring Boot配置就能运行起来">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-02T19:25:37.752Z">
+<meta property="og:updated_time" content="2019-04-03T10:13:23.027Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring Boot文档笔记">
-<meta name="twitter:description" content="Spring Boot是目前非常流行的微服务框架，它倡导”约定优于配置”的理念，其设计目的就是为了简化Spring应用初始化搭建及开发过程，一个产品级的应用往往只需要极少Spring Boot配置就能运行起来  一. Spring Boot 初相识Spring Boot使你能够创建独立的、可运行的产品级应用。Spring Boot对Spring生态中的第三方库进行了打包，使得开发者使用很少的配置">
+<meta name="twitter:description" content="Spring Boot是目前非常流行的微服务框架，它倡导”约定优于配置”的理念，其设计目的就是为了简化Spring应用初始化搭建及开发过程，一个产品级的应用往往只需要极少Spring Boot配置就能运行起来">
 
 
 
@@ -397,6 +397,7 @@
         <blockquote>
 <p>Spring Boot是目前非常流行的微服务框架，它倡导”约定优于配置”的理念，其设计目的就是为了简化Spring应用初始化搭建及开发过程，一个产品级的应用往往只需要极少Spring Boot配置就能运行起来</p>
 </blockquote>
+<a id="more"></a>
 <h4 id="一-Spring-Boot-初相识"><a href="#一-Spring-Boot-初相识" class="headerlink" title="一. Spring Boot 初相识"></a>一. Spring Boot 初相识</h4><p>Spring Boot使你能够创建独立的、可运行的产品级应用。Spring Boot对Spring生态中的第三方库进行了打包，使得开发者使用很少的配置就能完成应用的搭建过程。Spring Boot应用可以打包成一个jar包，然后在命令行中使用<code>java -jar</code>启动应用。Spring Boot的主要设计目的是：</p>
 <ul>
 <li>为所有的Spring应用提供一个快速的项目初始化过程</li>
@@ -439,7 +440,7 @@
 <li>自动识别项目配置文件，application.yml，application.properties这样的配置文件会被Spring Boot自动识别并打包到jar中去</li>
 </ul>
 <p><strong>启动器Starters</strong>：</p>
-<p>Starters是一些列便于使用的依赖项描述文件，使用starters可以”一站式”地引入Spring以及相关技术的依赖项，而无需再到处copy它们的maven坐标。比如开发者想要在应用中引入jpa进行持久化操作，只需要在pom.xml文件中添加<code>spring-boot-starter-data-jpa</code> 依赖描述文件即可，maven会分析依赖关系，然后自动地导入所需jar包，所有的Spring Boot官方的starter都以<code>spring-boot-starter-*</code> 形式命名，具体信息参考文档。</p>
+<p>Starters是一系列便于使用的依赖项描述文件，使用starters可以”一站式”地引入Spring以及相关技术的依赖项，而无需再到处copy它们的maven坐标。比如开发者想要在应用中引入jpa进行持久化操作，只需要在pom.xml文件中添加<code>spring-boot-starter-data-jpa</code> 依赖描述文件即可，maven会分析依赖关系，然后自动地导入所需jar包，所有的Spring Boot官方的starter都以<code>spring-boot-starter-*</code> 形式命名，具体信息参考文档。</p>
 <p><strong>应用代码的布局</strong>：</p>
 <p>Spring Boot无需特定的代码布局方式，但是有最佳实践。如果在类路径下没有什么package时，Spring Boot会将源文件都打包到一个<code>default package</code> 中去，但是不要这样做！这会导致<code>@ComponentScan</code> 和<code>@SpringBootApplication</code> 注解失效。最佳的实践是将项目中的源代码放到类似这样的目录结构下<code>com.example.project</code>.</p>
 <p>对于Spring Boot项目的启动类Main Application推荐放到<code>com.example.project</code> 目录的根目录下，这样便于<code>@ComponentScan</code> 注解从当前路径下扫描并注册Bean，最佳实践的例子如下，注意启动类的位置：</p>
