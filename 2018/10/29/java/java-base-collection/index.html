@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>Java基础笔记：集合Collection - 孤影</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="集合Collection是java中最强大的“数据引擎”，它规范了在应用中管理对象组的方式">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java基础笔记：集合Collection">
+<meta property="og:url" content="http://yoursite.com/2018/10/29/java/java-base-collection/index.html">
+<meta property="og:site_name" content="孤影">
+<meta property="og:description" content="集合Collection是java中最强大的“数据引擎”，它规范了在应用中管理对象组的方式">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://znker-blog.oss-cn-hangzhou.aliyuncs.com/thumbnail/20181029-lamp.jpg">
+<meta property="og:updated_time" content="2019-04-06T09:19:41.963Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java基础笔记：集合Collection">
+<meta name="twitter:description" content="集合Collection是java中最强大的“数据引擎”，它规范了在应用中管理对象组的方式">
+<meta name="twitter:image" content="https://znker-blog.oss-cn-hangzhou.aliyuncs.com/thumbnail/20181029-lamp.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/atom_icon.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/tomorrow.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<!-- <body class="is-2-column"> -->
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="Java基础笔记：集合Collection" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/1024/06/06/about/">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="codeznker" href="https://github.com/codeznker">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="https://znker-blog.oss-cn-hangzhou.aliyuncs.com/thumbnail/20181029-lamp.jpg" alt="Java基础笔记：集合Collection">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-28T16:00:00.000Z">2018-10-29</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Language/">Language</a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Java基础笔记：集合Collection
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>集合Collection是java中最强大的“数据引擎”，它规范了在应用中管理对象组的方式</p>
+</blockquote>
+<a id="more"></a>
+<h4 id="一-集合框架基础"><a href="#一-集合框架基础" class="headerlink" title="一. 集合框架基础"></a>一. 集合框架基础</h4><p>java集合框架标准化了程序处理对象组的方式。jdk1.5对集合框架进行了大幅修改，增加了泛型、自动装箱和拆箱以及for-each风格的for循环。在泛型之前，集合中存储的都是Object类型的引用，而使用泛型可以明确声明集合中要存储的对象的类型，避免出现运行时类型不匹配的错误，泛型给集合带来了“类型安全”的特性。</p>
+<p>集合只能存储引用类型，不能存储基本类型，因为自动装箱和自动拆箱特性的存在，当集合要存储基本类型的数据时，java会自动完成装箱和拆箱的工作。所有集合类都实现了Iterable接口，可以使用for-each风格的for循环遍历访问集合中的所有元素。</p>
+<h4 id="二-集合接口"><a href="#二-集合接口" class="headerlink" title="二. 集合接口"></a>二. 集合接口</h4><p>集合框架定义了一些核心接口，集合类只是提供了集合接口的不同实现方法</p>
+<p><strong>Collection接口</strong>：</p>
+<p>Collection接口是构建集合框架的基础，每个集合类都直接或间接实现了该接口。<code>interface Collection&lt;E&gt;</code> Collection是泛型接口，泛型参数E指定了集合将要存储的对象的类型。Collection接口声明了所有集合都将拥有的核心方法：</p>
+<ul>
+<li>add()：向集合中添加对象，添加的元素的类型必须和集合指定的类型匹配，添加成功就返回true</li>
+<li>contains()：判断集合中是否包含指定元素</li>
+<li>isEmpty()：判断调用集合是否为空</li>
+<li>remove()：从调用集合中移除指定实例</li>
+<li>size()：返回调用集合中元素的数量</li>
+<li>Iterator iterator()：返回调用集合的一个迭代器对象</li>
+</ul>
+<p><strong>List接口</strong>：</p>
+<p>List接口扩展了Collection，List用于依次添加元素到集合中，添加元素的顺序就是索引元素的顺序。列表的索引从0开始，使用元素的位置插入或访问元素，列表中可以包含重复的元素。List中定义的方法：</p>
+<ul>
+<li>add( int index，E obj )：将元素插入指定索引位置，插入点及之后位置存储的元素将被后移</li>
+<li>get( int index )：返回列表中指定索引位置处存储的元素</li>
+<li>remove( int index )：移除指定索引位置处存储的元素</li>
+<li>set( int index，E obj )：将指定索引位置处的元素替换为给定的对象obj，并返回该位置原来的对象</li>
+</ul>
+<p><strong>Set接口</strong>：</p>
+<p>Set接口声明了集中不允许有重复的元素，如果为Set集添加相同的元素就返回false.</p>
+<p><strong>Queue接口</strong>：</p>
+<p>Queue接口扩展了Collection接口，并且声明了<strong>队列</strong>的行为，队列通常是先进先出的列表。队列只能从头部获取或移除元素，只能从队尾添加元素，Queue中声明的方法：</p>
+<ul>
+<li>offer( E obj )：试图将对象obj添加到队列中，添加成功返回true</li>
+<li>E  element()：返回队列头部元素，但不移除该元素，如果队列为空返回NoSuchElementException异常</li>
+<li>peek()：返回队列头部的元素，如果队列对空则返回null，不移除元素</li>
+<li>poll()：返回队列头部元素，在操作过程中移除元素，如果队列为空返回null</li>
+<li>remove()：移除队列头部元素，并在操作过程中返回该元素，队列为空则抛出NoSuchElementException异常</li>
+</ul>
+<h4 id="三-集合实现类"><a href="#三-集合实现类" class="headerlink" title="三. 集合实现类"></a>三. 集合实现类</h4><p>java为集合接口提供了很多标准实现类，有的是抽象类，有的类则具有完整的实现。作为一般规则，集合类不是同步的，但是java为并发环境提供了集合实现类的同步版本。</p>
+<p><strong>ArrayList类</strong>：</p>
+<p>ArrayList类扩展了AbstractList类并且实现了List接口，ArrayList类支持能够按需增长的动态数组，本质上就是长度可变的动态数组。ArrayList类的构造函数：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 创建一个ArrayList对象</span></span><br><span class="line"><span class="hljs-keyword">new</span> ArrayList();</span><br><span class="line"><span class="hljs-comment">// 创建一个ArrayList对象，并且使用指定集合中的元素初始化</span></span><br><span class="line"><span class="hljs-keyword">new</span> ArrayList(Collection&lt;? extends E&gt; c);</span><br><span class="line"><span class="hljs-comment">// 创建初始容量为capacity的ArrayList对象</span></span><br><span class="line"><span class="hljs-keyword">new</span> ArrayList(<span class="hljs-keyword">int</span> capacity);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ArrayListToArray</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-comment">// 创建一个ArrayList对象</span></span><br><span class="line">        ArrayList&lt;Integer&gt; al = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 此处发生了自动装箱</span></span><br><span class="line">        al.add(<span class="hljs-number">1</span>);</span><br><span class="line">        al.add(<span class="hljs-number">2</span>);</span><br><span class="line">        al.add(<span class="hljs-number">3</span>);</span><br><span class="line">        al.add(<span class="hljs-number">4</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="hljs-string">"Contents of al: "</span> + al);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// ArrayList转数组，并且指定了数组中元素的类型</span></span><br><span class="line">        Integer ia[] = <span class="hljs-keyword">new</span> Integer[al.size()];</span><br><span class="line">        ia = al.toArray(ia);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i : ia) &#123;</span><br><span class="line">            sum += i;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="hljs-string">"Sum is: "</span> + sum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>LinkedList类</strong>：</p>
+<p>LinkedList类扩展了AbstractSequentialList类，实现了List、Deque以及Queue接口，并提供了一种链表的数据结构。</p>
+<p><strong>HashSet类</strong>：</p>
+<p>HashSet类用于创建使用哈希表存储元素的集合。哈希表使用称为散列的机制存储信息，在散列机制中，键的信息用于确定唯一的值，称为哈希码。然后使用哈希码作为索引，在索引的位置存储与键关联的数据。散列机制的优势是对于add()、contains()、remove()以及size()方法的执行时间保持不变，即使对于比较大的Set也是这样，因为不像List那样需要去遍历集合。因为散列处理过程通常不创建有序的组，<strong>所以HashSet不能保证元素的顺序</strong>。</p>
+<p><strong>LinkedHashSet类</strong>：</p>
+<p>LinkedHashSet维护组中条目的一个链表，链表中的元素的顺序也就是插入它们的顺序，这使得可以按照插入顺序迭代集合。</p>
+<p><strong>TreeSet类</strong>：</p>
+<p>TreeSet创建使用树进行存储的组，对象以<strong>升序</strong>存储，访问和检索速度非常快，这对于存储大量的、必须能够快速查找到的有序信息来说非常重要。</p>
+<h4 id="四-迭代器"><a href="#四-迭代器" class="headerlink" title="四. 迭代器"></a>四. 迭代器</h4><p>迭代器用于遍历集合中的元素，迭代器实现了Iterator接口，该接口中声明的方法非常简单：</p>
+<ul>
+<li>hashNext()：如果集合中还有更多的元素就返回true</li>
+<li>next()：返回集合中下一个元素</li>
+<li>remove()：移除当前元素</li>
+</ul>
+<p>每一个集合类都提供了iterator方法，该方法返回一个指向集合开头元素的迭代器，使用该迭代器对象可以依次访问集合中的每一个元素</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IteratorDemo</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        List&lt;String&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        list.add(<span class="hljs-string">"C"</span>);</span><br><span class="line">        list.add(<span class="hljs-string">"A"</span>);</span><br><span class="line">        list.add(<span class="hljs-string">"E"</span>);</span><br><span class="line">        list.add(<span class="hljs-string">"B"</span>);</span><br><span class="line">        list.add(<span class="hljs-string">"D"</span>);</span><br><span class="line">        list.add(<span class="hljs-string">"F"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 获取迭代器对象用于遍历集合</span></span><br><span class="line">        Iterator&lt;String&gt; itr = list.iterator();</span><br><span class="line">        <span class="hljs-keyword">while</span> (itr.hasNext()) &#123;</span><br><span class="line">            <span class="hljs-comment">// 获取集合中的下一个对象</span></span><br><span class="line">            String element = itr.next();</span><br><span class="line">            System.out.print(element + <span class="hljs-string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果不需要在迭代集合的过程中修改元素的内容，可以使用for-each循环迭代集合：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ForEachDemo</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="hljs-comment">// 创建一个集合对象</span></span><br><span class="line">        List&lt;Integer&gt; vals = <span class="hljs-keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line"></span><br><span class="line">        vals.add(<span class="hljs-number">5</span>);</span><br><span class="line">        vals.add(<span class="hljs-number">4</span>);</span><br><span class="line">        vals.add(<span class="hljs-number">3</span>);</span><br><span class="line">        vals.add(<span class="hljs-number">2</span>);</span><br><span class="line">        vals.add(<span class="hljs-number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// for-each循环</span></span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> v : vals) &#123;</span><br><span class="line">            System.out.print(v + <span class="hljs-string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="五-映射Map"><a href="#五-映射Map" class="headerlink" title="五. 映射Map"></a>五. 映射Map</h4><p>映射Map是存储键值对关联关系的对象，Map中的键和值都是对象Object，键key必须是唯一的，值value是可以重复的。映射类没有实现Iterator接口，所有无法直接获取迭代器遍历映射对象，但是可以获取映射的集合视图<code>Set&lt;Map.Entry&lt;&gt;&gt;</code>，由于是Set集合，所以可以使用for-each风格的循环迭代</p>
+<p><strong>Map接口</strong>：Map接口将唯一的键映射到值上，键key是用于检索值value的对象。Map中的核心方法是put()和get()方法：</p>
+<ul>
+<li>put()：将值value放入到映射中，覆盖之前与此键关联的值</li>
+<li>get()：返回与键key关联的值，如果没有找到键则返回null</li>
+<li><code>Set&lt;Map.Entry&lt;K, V&gt;&gt; entrySet()</code>：该方法返回包含所有映射条目（键值对）的Set集合，集合中包含的对象是Map.Entry类型的，可以迭代方法键值对中的信息</li>
+</ul>
+<p><strong>Map.Entry接口</strong>：该接口提供了操作映射条目Item的功能，它表示一个键值对映射对象，包含键和值的信息</p>
+<ul>
+<li>K  getKey()：获取映射项中键对象key</li>
+<li>V  getValue()：获取映射项中的值对象Value</li>
+</ul>
+<p><strong>HashMap类</strong>：HashMap类实现了Map接口，使用哈希表存储映射，HashMap的优势是get()和put()方法执行时间保持不变。<strong>HashMap不能保证元素的顺序</strong>！</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HashMapDemo</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">        HashMap&lt;String, String&gt; hm = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        hm.put(<span class="hljs-string">"book1"</span>, <span class="hljs-string">"《Java编程思想》"</span>);</span><br><span class="line">        hm.put(<span class="hljs-string">"book2"</span>, <span class="hljs-string">"《MySQL必知必会》"</span>);</span><br><span class="line">        hm.put(<span class="hljs-string">"book3"</span>, <span class="hljs-string">"《数据结构与算法》"</span>);</span><br><span class="line">        hm.put(<span class="hljs-string">"book4"</span>, <span class="hljs-string">"《JavaScript高级编程》"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 获取映射项的组视图</span></span><br><span class="line">        Set&lt;Map.Entry&lt;String, String&gt;&gt; entrySet = hm.entrySet();</span><br><span class="line">        <span class="hljs-comment">// 遍历组视图</span></span><br><span class="line">        <span class="hljs-keyword">for</span> (Map.Entry&lt;String, String&gt; entry : entrySet) &#123;</span><br><span class="line">            System.out.print(entry.getKey() + <span class="hljs-string">": "</span>);</span><br><span class="line">            System.out.println(entry.getValue());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>TreeMap类</strong>：该类用于创建存储在树结构中的映射，与HashMap不同，TreeMap中树映射确保元素以键的升序存储，支持快速检索</p>
+<p><strong>LinkedHashMap类</strong>：在映射中以插入条目的顺序维护一个条目链表，当遍历LinkedHashMap的集合视图的时候，将以元素的插入顺序返回元素</p>
+
+        </div>
+        
+        <hr style="height:1px;margin:1rem 0">
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/tags/Java/">Java</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/11/15/mysql/mysql-memo/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">MySQL备忘录</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/10/19/java/java-base-string-and-io/">
+                <span class="level-item">Java基础笔记：字符串与I/O流</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="http://znker-blog.oss-cn-hangzhou.aliyuncs.com/hexo-img/avatar.jpg" alt="Znker">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        Znker
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Java Developer
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Hangzhou, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        10
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        3
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        6
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/codeznker" target="_blank">
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="WeiBo" href="https://weibo.com/u/5764981017">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="WeChat" href="http://znker-blog.oss-cn-hangzhou.aliyuncs.com/hexo-img/WeChat-430x610.jpg">
+                
+                <i class="fab fa-weixin"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="http://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="Java基础笔记：集合Collection" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 Znker&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="codeznker" href="https://github.com/codeznker">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

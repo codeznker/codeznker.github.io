@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>Java基础笔记：面向对象 - 孤影</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="封装、继承和多态是面向对象编程的三大基础">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java基础笔记：面向对象">
+<meta property="og:url" content="http://yoursite.com/2018/10/11/java/java-base-oop/index.html">
+<meta property="og:site_name" content="孤影">
+<meta property="og:description" content="封装、继承和多态是面向对象编程的三大基础">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://znker-blog.oss-cn-hangzhou.aliyuncs.com/thumbnail/20181011-landscape.jpg">
+<meta property="og:updated_time" content="2019-04-06T08:36:31.576Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java基础笔记：面向对象">
+<meta name="twitter:description" content="封装、继承和多态是面向对象编程的三大基础">
+<meta name="twitter:image" content="https://znker-blog.oss-cn-hangzhou.aliyuncs.com/thumbnail/20181011-landscape.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/atom_icon.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/tomorrow.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<!-- <body class="is-2-column"> -->
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="Java基础笔记：面向对象" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/1024/06/06/about/">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="codeznker" href="https://github.com/codeznker">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="https://znker-blog.oss-cn-hangzhou.aliyuncs.com/thumbnail/20181011-landscape.jpg" alt="Java基础笔记：面向对象">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-10T16:00:00.000Z">2018-10-11</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Language/">Language</a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Java基础笔记：面向对象
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>封装、继承和多态是面向对象编程的三大基础</p>
+</blockquote>
+<a id="more"></a>
+<h4 id="一-类Class"><a href="#一-类Class" class="headerlink" title="一. 类Class"></a>一. 类Class</h4><p>类是对象的模板，它定义了对象的成员变量和成员方法，是一种逻辑结构。类Class也定义了一种数据类型（引用类型），可以使用这种新的类型创建该类型的对象。在定义类的时候一般要声明它的属性和方法，类中定义的变量称为成员变量，该类的所有对象都有一个这个变量的副本。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// class关键字表明要定义一个类，同时也定义了一种Box类型的数据类型</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Box</span> </span>&#123;</span><br><span class="line">	<span class="hljs-comment">// 定义类的成员变量</span></span><br><span class="line">	<span class="hljs-keyword">double</span> width;</span><br><span class="line">	<span class="hljs-keyword">double</span> height;</span><br><span class="line">	<span class="hljs-keyword">double</span> depth;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>创建对象</strong>：</p>
+<p>获取一个类的对象需要经过两个步骤：</p>
+<ol>
+<li>声明一个该类型的引用变量variable</li>
+<li>获取该类型的实例instance并将其引用（内存地址值）赋值给引用变量</li>
+</ol>
+<p><code>Box box = new Box()</code>，这行代码首先声明了一个Box类型的引用变量box，然后使用<strong>new运算符</strong>在运行时动态地为对象分配内存空间，然后将这个<strong>内存地址值</strong>赋值给引用变量box，new运算符后面跟着是构造函数，它定义了创建对象时发生的操作（初始化对象），类中如果没有显式地定义构造函数，那么编译器会自动的提供一个默认的无参构造函数。</p>
+<p>当将一个对象的引用变量赋值给另一个对象引用变量的时候，不是创建对象的副本，而是创建引用副本</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 此时变量b1和b2指向同一个对象，因为在将变量b1赋值给b2时</span></span><br><span class="line"><span class="hljs-comment">// 并不是创建对象的副本，而是将b1存放的内存地址值赋值给b2，创建的是引用的副本</span></span><br><span class="line">Box b1 = <span class="hljs-keyword">new</span> Box();</span><br><span class="line">Box b2 = b1;</span><br></pre></td></tr></table></figure>
+<h4 id="二-方法"><a href="#二-方法" class="headerlink" title="二. 方法"></a>二. 方法</h4><p>方法的本质是定义了操作对象中变量的接口，方法的一般形式：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function">type <span class="hljs-title">methodname</span><span class="hljs-params">(parameter-list)</span></span>&#123;</span><br><span class="line">    <span class="hljs-comment">// 方法体</span></span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">// 事先已经声明过的变量variabale</span></span><br><span class="line">    <span class="hljs-keyword">return</span> variable;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>type指定了方法返回的数据的类型，可以是基本类型primary或者引用类型object，如果方法不返回值，那么他的返回类型就是void. parameter-list是方法的参数列表，参数的本质是方法中的局部变量，当调用方法的时候它们用于接收为方法传递的值。return语句用于方法返回值，返回值的类型一定要和声明的type类型相匹配，可以存在隐式的类型转换。</p>
+<p><strong>构造函数</strong>：构造函数的名称和类名称相同，语法上和方法类似，但构造函数没有返回值类型，因为返回值隐式的为对象本身。在使用<strong>new运算符</strong>创建对象之后，jvm会立即调用构造函数来初始化对象，如果类中没有显式地定义构造函数，java会调用一个默认的无参构造函数，同时将有的成员变量初始化为默认值（0 / false / null），构造函数的任务就是初始化对象内部状态。构造函数也可以带有参数，这些参数用于初始化对象中的变量。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Box</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">double</span> width;</span><br><span class="line">    <span class="hljs-keyword">double</span> height;</span><br><span class="line">    <span class="hljs-keyword">double</span> depth;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 自定义的带参构造函数，参数用于初始化对象中的变量</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Box</span><span class="hljs-params">(<span class="hljs-keyword">double</span> w, <span class="hljs-keyword">double</span> h, <span class="hljs-keyword">double</span> d)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="hljs-string">"Constructing Box..."</span>);</span><br><span class="line">        width = w;</span><br><span class="line">        height = h;</span><br><span class="line">        depth = d;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>this关键字</strong>：在方法中可以使用this关键字指向调用该方法的对象。this关键字的另一个用法是当方法中的局部变量（包括方法入参）和类的成员变量名称相同的时候，局部变量会覆盖类的成员变量，此时使用this关键字可以明确指向类的成员变量。</p>
+<p><strong>方法的重载</strong>：在同一个java类中定义多个名称相同的方法是合法的，只要方法的参数类型或者数量不同即可，这些方法被称为是重载的。当调用重载的方法的时候，jvm会根据传递给方法的参数的实际类型与方法的形参之间的比较来决定具体调用哪个方法。构造函数的重载是很常见的，一个类往往会有过个重载的构造函数。</p>
+<p><strong>给方法传递对象作为参数</strong>：除了基本类型的参数之外，方法还可以接受对象作为参数（废话）。java中的参数传递分为两种：</p>
+<ul>
+<li>值调用 call-by-value：将实参的值赋值给形参，实参值后续的变化不会影响形参</li>
+<li>引用调用 call-by-reference：在这种情况下，实参因为保存的是对象的内存地址值，传给形参的也是地址值，所以实参变量和形参变量指向是同一个对象，实参属性的改变会影响实参属性</li>
+</ul>
+<p><strong>static关键字</strong>：在类中可以使用static关键字修饰变量和方法，将变量和方法声明为静态的。静态变量和方法可以使用类名直接调用，不需要通过任何类的对象引用。静态变量本质就是<strong>全局变量</strong>了，所有的对象共享的是相同的静态变量，而不是保存的变量副本。</p>
+<p>静态变量可以使用<strong>静态代码块</strong>去初始化，而且静态代码块只会执行一次，就是在类加载的时候</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UseStatic</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 静态变量相当于全局变量</span></span><br><span class="line">    <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> a = <span class="hljs-number">3</span>;</span><br><span class="line">    <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> b;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">meth</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="hljs-string">"x = "</span> + x);</span><br><span class="line">        System.out.println(<span class="hljs-string">"x = "</span> + a);</span><br><span class="line">        System.out.println(<span class="hljs-string">"x = "</span> + b);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 静态代码块，在类加载的时候就会执行，所以它会在meth()方法之前执行</span></span><br><span class="line">    <span class="hljs-keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="hljs-string">"Static block initialized."</span>);</span><br><span class="line">        b = a * <span class="hljs-number">4</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-comment">// 调用静态方法，不需要通过任何类的对象引用，直接调用</span></span><br><span class="line">        meth(<span class="hljs-number">42</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>final关键字</strong>：final关键字可以用于修饰变量、方法或者类</p>
+<ul>
+<li>使用final修饰的变量值是不可被改变的，实际上就变成了常量，final修饰的变量必须在声明的时候就初始化</li>
+<li>使用final修饰的方法可以防止被子类重写，这对于类中一些关键的核心方法很重要，防止被错误重写</li>
+<li>final也可以修饰类，此时这个类就不可被继承了，同时也隐式地将类中所有方法也声明为final的，因为类不能被继承了，方法也就更不可被重写了</li>
+</ul>
+<h4 id="三-继承"><a href="#三-继承" class="headerlink" title="三. 继承"></a>三. 继承</h4><p>继承是面向对象编程的一大特性，子类在继承父类的时候会得到父类所有的属性和方法，并且子类可以添加自己特有的属性和方法，所以子类是父类的特殊化版本。子类不能访问父类中声明为private的私有属性和方法，但是声明为protected的变量和方法子类是可以访问的。</p>
+<p><strong>多态</strong>：父类的引用变量是可以指向子类对象的！当将指向子类对象的引用赋值给父类引用变量的时候，父类引用只能访问那些在父类中定义的属性和方法，子类中自己定义的属性和方法时无法访问到的。</p>
+<p><strong>super关键字</strong>：对于父类中的私有属性和方法，子类引用是无法直接调用的，此时可以在子类中使用super关键字来表示引用子类的直接超类。super关键字主要有两种用法：第一种是在子类构造函数中调用超类的构造函数，第二种是访问超类中被子类隐藏的成员变量（子父类中存在同名变量，糟糕的设计），super()必须是子类构造函数中的第一条语句，如果自己没有写，则编译器会默认加上。</p>
+<p><strong>构造函数调用时期</strong>：在类层次中，从超类到子类按照继承顺序调用构造函数，并且super()必须是子类构造函数中的第一条语句，如果没有显式调用，那么编译器会默认加上超类的无参构造函数</p>
+<p><strong>方法的重写</strong>：如果子类中的某个方法和超类中的某个方法具有相同的方法名和参数列表，那么称子类重写了父类中的该方法，此时在子类中调用重写的方法的时候，总是指向由子类定义的版本，如果希望调用父类定义的版本，则需要使用super关键字明确指出。</p>
+<p><strong>动态方法调用</strong>：动态方法调用是一种机制，它允许java在运行时而不是编译时解析对重写方法的调用，举例来说，如果一个接口中的某个方法被多个实现类所重写，当使用接口类型的引用变量调用这个方法的时候，jvm会根据引用变量所指向的对象的实际类型来决定具体调用哪个方法重写版本！多态是面向对象编程的基础之一，多态允超类规定对所有继承类或实现类都通用的方法，并允许子类重新定义其中的方法实现。</p>
+<p><strong>抽象类</strong>：有的时候方法在超类中可以没有具体实现，继承抽象类的子类要么实现抽象方法，要么本身也是抽象类。为了确保某些方法必须被子类所重写，可以将该方法声明为抽象方法abstract，抽象方法没有方法体，任何一个包含一个或多个抽象方法的类都必须声明为抽象类。由于抽象类的定义是不完整的，所有抽象类不能使用new实例化对象，同时抽象类也不能声明构造函数和静态方法。虽然抽象类不能实例化，但是定义抽象类的引用变量是合法的。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 抽象类</span></span><br><span class="line"><span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">// 抽象方法，没有方法体</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">callme</span><span class="hljs-params">()</span></span>;</span><br><span class="line">	</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">callmeto</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="hljs-string">"这是一个具体的方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">B</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">A</span> </span>&#123;  </span><br><span class="line">    <span class="hljs-comment">// 重写超类中的抽象方法，给出方法的具体实现</span></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">callme</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="hljs-string">"B's implementation of callme."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Object类</strong>：Object类是java中的“上帝类”，java中的所有类都直接或间接继承该类，Object类中提供了很多非常重要的方法</p>
+<ul>
+<li>Class&lt;?&gt;  getClass()：在运行时动态获取对象所属的类型</li>
+<li>int  hashCode()：获取对象关联的哈希码</li>
+<li>wait() / notify() / notifyAll()：线程中的通信方法</li>
+<li>boolean  equals( Object obj )：判断一个对象是否和另一个对象相等</li>
+</ul>
+<h4 id="四-访问控制"><a href="#四-访问控制" class="headerlink" title="四. 访问控制"></a>四. 访问控制</h4><p><strong>包的作用package</strong>：包是多个类的容器，包的路径和类名组成唯一的标识用于类名称空间的互相隔离。包既是命名机制，也是一种可见性机制。</p>
+<p><strong>访问修饰符</strong>：java提供了四种不同类别的可见性修饰符</p>
+<ul>
+<li>private：成员变量或方法能被同一个类中的成员访问</li>
+<li>无访问修饰符：同一个包下的非子类可以访问</li>
+<li>protected：不同包下的子类可以访问</li>
+<li>public：任何地方都可以访问</li>
+</ul>
+<h4 id="五-接口interface"><a href="#五-接口interface" class="headerlink" title="五. 接口interface"></a>五. 接口interface</h4><p>接口是对类的高度抽象，接口是一种规范，它规定了类必须实现的方法，所以接口中的所有方法都没有方法体。一个类只能继承一个超类，但是可以实现任意数量的接口，只要为接口中的方法提供完整的实现即可。如果一个类只实现了接口中的部分方法，那么这个类必须声明为抽象类abstract。</p>
+<p>接口被设计为支持<strong>运行时动态方法解析（多态）</strong>，即接口类型的引用变量可以指向实现类的对象，当调用接口中的方法时，jvm会根据引用变量实际指向的对象的类型来判断具体调用哪个版本的方法，利用多态机制可以实现“一个接口，多种实现方法”。</p>
+<p>接口中是可以声明变量的，只是这些变量都隐式的标识为static和final，这意味着接口的实现类不能修改他们，并且在声明的时候就必须初始化。接口中的方法和变量都被隐式声明为public</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Callback</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">// 接口中的方法和变量都隐式地声明为public</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">callback</span><span class="hljs-params">(<span class="hljs-keyword">int</span> num)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Client</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Callback</span></span>&#123;</span><br><span class="line">    <span class="hljs-comment">// 实现接口中定义的方法，必须声明为public，因为接口中定义的方法隐式地声明为public</span></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">callback</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="hljs-string">"callback called with: "</span> + p);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 在实现类中定义自己的成员方法</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">nonIfaceMethod</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="hljs-string">"Methods defined by class..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="六-异常处理"><a href="#六-异常处理" class="headerlink" title="六. 异常处理"></a>六. 异常处理</h4><p>异常Exception是程序中运行时的错误，java使用面向对象的方法来管理异常，当出现引起异常的情况时就会创建用来表示异常的的对象Throwable，并在引起异常的方法中抛出异常对象。</p>
+<p><strong>异常的类型</strong>：</p>
+<p>java中所有的异常类型都是内置类Throwable的子类，Throwable有两个子类</p>
+<ul>
+<li>Exception：这种类型异常用于表示应用程序应该捕获的异常，用户也可以创建继承自该类的子类异常</li>
+<li>Error：这种异常定义了常规环境下不应该被应用程序捕获的异常，这类异常会被java运行时系统捕获，通常是那些堆栈溢出等灾难性的失败，这些异常即使被应用程序捕获也无法处理</li>
+</ul>
+<p><strong>未捕获的异常</strong>：</p>
+<p>应用的一旦出现异常，就必须有一个异常处理程序来捕获并处理异常，如果应用程序自己没有捕获异常，那么这些异常将由jre默认的异常处理程序捕获，默认的异常处理程序会输出异常点的堆栈追踪信息，<strong>并且默认的异常处理程序会导致程序终止运行，假如是web应用就会终止服务！</strong></p>
+<p><img src="https://znker-blog.oss-cn-hangzhou.aliyuncs.com/java/java_base/Exception_190223_001.png" alt></p>
+<p>堆栈追踪信息指明了异常发生的位置：类名、方法名、异常发生的代码行</p>
+<p><strong>使用try和catch</strong>：</p>
+<p>使用try和catch自己处理异常的好处主要是阻止程序自动终止。try封装需要监视的代码块，catch子句指定了希望捕获的异常类型，一旦try中抛出了catch指定类型的异常，该异常就会被catch子句捕获，程序的控制权将由try语句转移到catch子句中，而catch中封装了处理异常的程序，比如给前端返回一段异常信息，并在后台记录异常，以便程序调试。执行完catch子句之后，程序的控制就会继续进入到程序中整个try / catch代码块的下一行，程序不会终止</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Exc2</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> d, a;</span><br><span class="line">		</span><br><span class="line">        <span class="hljs-comment">// 封装了可能发生异常的代码块</span></span><br><span class="line">        <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">            d = <span class="hljs-number">0</span>;</span><br><span class="line">            a = <span class="hljs-number">42</span> / d;</span><br><span class="line">            <span class="hljs-comment">// 上一行发生异常，这一句不会被执行</span></span><br><span class="line">            System.out.println(<span class="hljs-string">"This will not be printed."</span>);</span><br><span class="line">        &#125; <span class="hljs-keyword">catch</span> (ArithmeticException e) &#123;</span><br><span class="line">            <span class="hljs-comment">// 捕获并处理异常，此处只是简单地在控制台打印异常信息</span></span><br><span class="line">            System.out.println(<span class="hljs-string">"Division by zero"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// try/catch之后的代码会被执行</span></span><br><span class="line">        System.out.println(<span class="hljs-string">"After catch statement."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>throw关键字</strong>：</p>
+<p>除了java运行时系统抛出的异常之外，程序也可以使用throw关键字手动抛出异常，throw语句之后的代码将不会被执行。异常既然抛出来了，jre就会检查有没有与之类型匹配的catch子句，如果没有则这些异常将由jre默认的异常处理程序所捕获，打印堆栈追踪信息，程序终止</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThrowDemo</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">// 该方法会发生异常，但是自己有处理程序</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">demoproc</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">            <span class="hljs-comment">// 手动创建java的标准异常对象并抛出异常对象</span></span><br><span class="line">            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException(<span class="hljs-string">"demo"</span>);</span><br><span class="line">        &#125; <span class="hljs-keyword">catch</span> (NullPointerException e) &#123;</span><br><span class="line">            <span class="hljs-comment">// 捕获异常</span></span><br><span class="line">            System.out.println(<span class="hljs-string">"Caught inside demoproc"</span>);</span><br><span class="line">            <span class="hljs-comment">// 再次抛出异常</span></span><br><span class="line">            <span class="hljs-keyword">throw</span> e;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">            <span class="hljs-comment">// 该方法将抛出异常</span></span><br><span class="line">            demoproc();</span><br><span class="line">        &#125; <span class="hljs-keyword">catch</span> (NullPointerException e) &#123;</span><br><span class="line">            <span class="hljs-comment">// 再次捕获异常</span></span><br><span class="line">            System.out.println(<span class="hljs-string">"Recaught: "</span> + e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>throws关键字</strong>：</p>
+<p>如果方法可能发生的异常自己不能处理，则需要指明这种行为，以便方法的调用者可以自己编写异常处理程序。在方法上使用throws子句可以声明方法可能抛出的所有异常类型，除了Error和RuntimeException之外的异常类型都需要这么做</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThrowsDemo</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">// 方法会产生异常，但自己不使用try/catch处理，而是使用throws关键字显式地抛出</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">throwOne</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IllegalAccessException </span>&#123;</span><br><span class="line">        System.out.println(<span class="hljs-string">"Inside throwOne"</span>);</span><br><span class="line">        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalAccessException(<span class="hljs-string">"demo"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-comment">// 方法的调用者捕获并处理异常</span></span><br><span class="line">        <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">            throwOne();</span><br><span class="line">        &#125; <span class="hljs-keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">            System.out.println(<span class="hljs-string">"Caught "</span> + e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>finally关键字</strong>：</p>
+<p>考虑这种情况，方法中获取了一个数据库连接资源Connection，然后方法执行出现异常，此时Connection并未被关闭，依然占用系统资源，假如有很多Connection对象都打开着，数据库系统资源将很快被耗尽导致数据库宕机。关键姿finally就是用来解决这种问题的，finally子句中的代码会在try/catch代码块之后执行，不管方法是否发生异常都会执行finally子句中的代码。</p>
+
+        </div>
+        
+        <hr style="height:1px;margin:1rem 0">
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/tags/Java/">Java</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/10/19/java/java-base-string-and-io/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Java基础笔记：字符串与I/O流</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/10/03/java/java-base-grammer/">
+                <span class="level-item">Java基础笔记：基本语法</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="http://znker-blog.oss-cn-hangzhou.aliyuncs.com/hexo-img/avatar.jpg" alt="Znker">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        Znker
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Java Developer
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Hangzhou, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        10
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        3
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        6
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/codeznker" target="_blank">
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="WeiBo" href="https://weibo.com/u/5764981017">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="WeChat" href="http://znker-blog.oss-cn-hangzhou.aliyuncs.com/hexo-img/WeChat-430x610.jpg">
+                
+                <i class="fab fa-weixin"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="http://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+<div class="card widget column-left is-sticky" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#一-类Class">
+        <span class="has-mr-6">1</span>
+        <span>一. 类Class</span>
+        </a></li><li>
+        <a class="is-flex" href="#二-方法">
+        <span class="has-mr-6">2</span>
+        <span>二. 方法</span>
+        </a></li><li>
+        <a class="is-flex" href="#三-继承">
+        <span class="has-mr-6">3</span>
+        <span>三. 继承</span>
+        </a></li><li>
+        <a class="is-flex" href="#四-访问控制">
+        <span class="has-mr-6">4</span>
+        <span>四. 访问控制</span>
+        </a></li><li>
+        <a class="is-flex" href="#五-接口interface">
+        <span class="has-mr-6">5</span>
+        <span>五. 接口interface</span>
+        </a></li><li>
+        <a class="is-flex" href="#六-异常处理">
+        <span class="has-mr-6">6</span>
+        <span>六. 异常处理</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="Java基础笔记：面向对象" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 Znker&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="codeznker" href="https://github.com/codeznker">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

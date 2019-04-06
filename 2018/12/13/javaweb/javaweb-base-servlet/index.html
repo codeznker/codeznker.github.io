@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>JavaWeb编程基础：Servlet技术 - 孤影</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="Servlet技术是javaweb编程的核心，它用于处理客户端的请求与响应">
+<meta name="keywords" content="JavaWeb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaWeb编程基础：Servlet技术">
+<meta property="og:url" content="http://yoursite.com/2018/12/13/javaweb/javaweb-base-servlet/index.html">
+<meta property="og:site_name" content="孤影">
+<meta property="og:description" content="Servlet技术是javaweb编程的核心，它用于处理客户端的请求与响应">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://znker-blog.oss-cn-hangzhou.aliyuncs.com/thumbnail/20181213-mountain.jpg">
+<meta property="og:updated_time" content="2019-04-06T15:25:00.641Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaWeb编程基础：Servlet技术">
+<meta name="twitter:description" content="Servlet技术是javaweb编程的核心，它用于处理客户端的请求与响应">
+<meta name="twitter:image" content="https://znker-blog.oss-cn-hangzhou.aliyuncs.com/thumbnail/20181213-mountain.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/atom_icon.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/tomorrow.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<!-- <body class="is-2-column"> -->
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="JavaWeb编程基础：Servlet技术" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/1024/06/06/about/">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="codeznker" href="https://github.com/codeznker">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="https://znker-blog.oss-cn-hangzhou.aliyuncs.com/thumbnail/20181213-mountain.jpg" alt="JavaWeb编程基础：Servlet技术">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-12-12T16:00:00.000Z">2018-12-13</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Framework/">Framework</a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                JavaWeb编程基础：Servlet技术
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>Servlet技术是javaweb编程的核心，它用于处理客户端的请求与响应</p>
+</blockquote>
+<a id="more"></a>
+<h4 id="一-JavaWeb开发中的基本概念"><a href="#一-JavaWeb开发中的基本概念" class="headerlink" title="一. JavaWeb开发中的基本概念"></a>一. JavaWeb开发中的基本概念</h4><p>1996年Sun公司发布了Java Servlet技术，该技术后来成为在Web应用中生成动态内容的标准。Servlet是运行在服务端的java类，用于处理客户端的http请求并作出响应html，运行在服务端的servlet接收由servlet容器（tomcat/jetty）转发的针对指定URL的请求（HttpRequest），web应用程序使用web.xml或者注解映射URL和servlet之间的关系。起初的servlet响应是全部写在servlet程序中的，使用PrintWriter对象将html响应页面的内容一行行地写回客户端（html），这要求java程序员需要精通网页编程技术，同时由于硬编码使得debug非常困难。JavaServer Pages（jsp）技术的出现改变了这一现状，jsp本质还是servlet，jsp技术允许在html文档中嵌入java脚本程序用于动态生成需要查询数据库的内容，这样使得页面中的静态资源（html/text/image/href…）和动态内容得以分离，静态资源直接写在html模板内，而动态内容查询数据库之后使用jsp标签（EL）渲染到模板页面中。Servlet和JSP程序需要部署在servlet/jsp容器中才能运行，常见的servlet/jsp容器有tomcat和jetty，servlet容器和客户端（browser/app）之间使用HTTP协议进行通信。</p>
+<h4 id="二-Servlet接口"><a href="#二-Servlet接口" class="headerlink" title="二. Servlet接口"></a>二. Servlet接口</h4><p>Servlet api是javaweb开发技术的基础，它的核心是Servlet接口。Servlet接口是servlet容器和servlet程序之间的一种“契约”，它约定servlet容器会加载servlet类到内存中（init），当servlet容器接收到客户端针对特定URL的http请求时，容器会调用该servlet类中的方法（service）去处理请求并作出响应。在servlet容器将http请求转发给servlet程序之前，servlet容器会事先创建一个ServletRequest和ServletResponse对象，其中servlet容器解析了http请求报文的原始数据，并将解析后的数据封装到ServletRequest对象中，开发者调用ServletRequest对象中的方法即可获取相应的请求信息和请求参数parameter，而ServletResponse对象则代表了servlet程序对http请求的响应（html/json…），它封装了响应的复杂性。</p>
+<p>Servlet接口中的方法，这些方法都是由servlet容器调用的，这些方法也是servlet生命周期方法：</p>
+<ul>
+<li><strong>init</strong>：当第一次请求servlet时，servlet容器会调用该方法初始化servlet对象到内存当中，在调用这个方法的时候servlet容器还会传递一个ServletConfig对象给该方法，ServletConfig对象中封装了servlet的初始化参数，这些初始化参数定义在web.xml或者注解中</li>
+<li><strong>service</strong>：该方法用于处理客户端请求，每次请求servlet的时候，容器都会调用这个方法，同时传递给service方法两个对象参数：ServletRequest &amp; ServletResponse，service方法从ServletRequest对象中获取请求参数，然后调用web应用中的javabean组件操作数据库并完成业务逻辑，将需要返回的结果对象寄存在request请求作用域中，然后将http请求转发给jsp模板页面用于页面渲染返回结果。如果想要返回JSON格式的数据，则调用json序列化工具（Jackson）将返回的结果序列化之后由ServletResponse对象直接写回客户端。</li>
+<li><strong>destroy</strong>：当应用程序卸载或者servlet容器关闭的时候由servlet容器调用，释放系统资源。</li>
+</ul>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 使用注解开发Servlet而不是web.xml</span></span><br><span class="line"><span class="hljs-comment">// @WebServlet注解表示这个类是一个Servlet，urlPatterns元素告知servlet容器匹配请求的URL</span></span><br><span class="line"><span class="hljs-meta">@WebServlet</span>(name = <span class="hljs-string">"MyServlet"</span>, urlPatterns = &#123;<span class="hljs-string">"/my"</span>&#125;)</span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyServlet</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Servlet</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">transient</span> ServletConfig servletConfig;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">(ServletConfig servletConfig)</span> <span class="hljs-keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.servletConfig = servletConfig;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">service</span><span class="hljs-params">(ServletRequest request, ServletResponse response)</span></span></span><br><span class="line"><span class="hljs-function">            <span class="hljs-keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        String servletName = servletConfig.getServletName();</span><br><span class="line">        <span class="hljs-comment">// 设置响应的格式为html页面，并指定页面编码格，默认是ISO-8859-1，中文会乱码</span></span><br><span class="line">        response.setContentType(<span class="hljs-string">"text/html;charset=utf-8"</span>);</span><br><span class="line">        <span class="hljs-comment">// PrintWriter对象，用于将响应的html页面发送到客户端</span></span><br><span class="line">        PrintWriter writer = response.getWriter();</span><br><span class="line">        <span class="hljs-comment">// 设置HTTP请求响应的内容，其中servletName为动态获取的</span></span><br><span class="line">        writer.print(<span class="hljs-string">"&lt;html&gt;&lt;head&gt;&lt;/head&gt;"</span> + <span class="hljs-string">"&lt;body&gt;Hello from "</span> + servletName</span><br><span class="line">            + <span class="hljs-string">"&lt;/body&gt;&lt;/html&gt;"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> ServletConfig <span class="hljs-title">getServletConfig</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> servletConfig;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getServletInfo</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-string">"My Servlet"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">destroy</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>javaweb应用具有特定的目录结构，其中<code>WEB-INF</code>目录下的资源不能被客户端直接访问，只能由web程序内部访问。web应用的部署：将整个应用程序打包为war格式，然后复制到tomcat的webapps目录下，然后启动tomcat即可，也可以使用IDE配置tomcat自动部署。</p>
+<p>在浏览器中输入<a href="http://http://localhost:8080/my，查看返回的页面源码正是servlet中PrintWriter对象输出的内容，这样就完成了一次http的请求和响应过程" target="_blank" rel="noopener">http://http://localhost:8080/my，查看返回的页面源码正是servlet中PrintWriter对象输出的内容，这样就完成了一次http的请求和响应过程</a></p>
+<p><img src="https://znker-blog.oss-cn-hangzhou.aliyuncs.com/javaweb/javaweb_190223_001.png" alt></p>
+<h4 id="三-ServletRequest"><a href="#三-ServletRequest" class="headerlink" title="三. ServletRequest"></a>三. ServletRequest</h4><p>对于每一个http请求，servlet容器都会创建一个ServletRequest对象传递个servlet的service方法，servlet容器解析了http请求中的原始请求数据（请求头信息&amp;请求参数parameter），servlet容器将解析后的数据封装到了ServletRequest对象中，其中最重要的就是请求参数。<strong>getParameter()</strong>方法可以获取表单域（form）中的请求参数值，也可以获取查询字符串的值Query，例如对于<a href="http://localhost:8080/role?id=233请求，如果参数名不存在则返回null" target="_blank" rel="noopener">http://localhost:8080/role?id=233请求，如果参数名不存在则返回null</a></p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@WebServlet</span>(name = <span class="hljs-string">"roleServlet"</span>, urlPatterns = &#123;<span class="hljs-string">"/role"</span>&#125;)</span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RoleServlet</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doGet</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span></span></span><br><span class="line"><span class="hljs-function">            <span class="hljs-keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="hljs-comment">// 使用getParameter方法获取查询字符串的值</span></span><br><span class="line">        String roleId = request.getParameter(<span class="hljs-string">"id"</span>);</span><br><span class="line">        System.out.println(roleId);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ServletRequest对象中的那些重要方法：</p>
+<ul>
+<li>setAttribute() / getAttribute() / removeAttribute()：ServletRequest本身是一个作用域，该对象可以用于存储键值对key-value类型的数据，该作用域的范围仅限于一次请求响应过程中，因为在service方法结束后，request对象将被jvm垃圾回收掉，而Request域中的对象也会被销毁</li>
+<li>getContentType：获取http请求体中的类型，比如在上传图片的时候就可能是 image/png</li>
+<li>getInputStream：从请求体中获取二进制的数据，结果返回一个ServletInputStream对象</li>
+<li>getParameter( java.lang.String  name )：获取指定名称的请求参数的值</li>
+<li>getRequestDispatcher( java.lang.String  path )：获取一个请求转发器对象，该对象中封装了转发的地址</li>
+</ul>
+<p>ServletRequest最重要的作用是该对象中封装了请求信息和参数，在service方法中可以使用这些数据！</p>
+<h4 id="四-ServletResponse"><a href="#四-ServletResponse" class="headerlink" title="四. ServletResponse"></a>四. ServletResponse</h4><p>Servlet容器在调用servlet的service方法之前会创建一个ServletResponse对象用于表示对于http请求的响应，该对象隐藏了将响应发送给客户端的复杂性。在jsp出现之前，如果响应格式是html页面，则需要手动调用<strong>getWriter</strong>方法获取PrintWriter对象后将页面一行行写回到客户端！如果响应格式是二进制数据（文件下载），使用<strong>getOutStream</strong>方法获取一个输出流对象。jsp技术出现之后，在service方法完成业务逻辑返回结果之后，可以将结果对象存放到request作用域中，然后将请求转发给jsp页面，而将响应页面发送到客户端的过程将由jsp编译之后的servlet默认执行。</p>
+<p>ServletResponse对象中的那些重要方法：</p>
+<ul>
+<li>getWriter：该方法返回一个java.io.PrintWriter对象，该对象可以将响应结果的html页面写回客户端</li>
+<li>getOutputStream：该方法返回一个输出流对象，用于处理二进制文件下载，比如图片、文档….</li>
+<li>setContentType：因为PrintWriter对象默认的编码格式是IOS-8859-1，在处理中文响应的时候需要手动设置编码格式为utf-8，否则会出现页面中文乱码问题</li>
+</ul>
+<h4 id="五-ServletConfig"><a href="#五-ServletConfig" class="headerlink" title="五. ServletConfig"></a>五. ServletConfig</h4><p>在servlet容器初始化servlet时，会给servlet的init方法传递一个ServletConfig对象，该对象中封装了servlet的初始化参数，这些参数是通过<code>@WebServlet</code> 或者web.xml部署描述符设定的。这些参数也是用键值对存储，这些参数在整个servlet生命周期中都可以调用。ServletConfig的另一个重要的方法是<strong>getServletContext()</strong>，该方法用于在servlet内获取与servlet关联的ServletContext对象！</p>
+<h4 id="六-ServletContext"><a href="#六-ServletContext" class="headerlink" title="六. ServletContext"></a>六. ServletContext</h4><p>ServletContext对象表示web应用程序的上下文，每个web应用程序只有一个context，在servlet容器初始化web应用的时候就会创建这个对象，ServletConfig对象的<strong>getServletConfig()</strong>方法可以获取这个对象。因为ServletContext作用域为整个web应用生命周期，所以它可以跨servlet存储数据。</p>
+<h4 id="七-HttpServlet"><a href="#七-HttpServlet" class="headerlink" title="七. HttpServlet"></a>七. HttpServlet</h4><p>HttpServlet类继承了GenericServlet抽象类，并且覆盖了service方法，传递给service方法的对象变成HttpServletRequest和HttpServletResponse，在HttpServlet中无需重写service方法，只需要重写doGet，doPost方法就可以处理HTTP请求，细节可查看源码：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">service</span><span class="hljs-params">(ServletRequest req, ServletResponse res)</span></span></span><br><span class="line"><span class="hljs-function">        <span class="hljs-keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">	HttpServletRequest  request;</span><br><span class="line">	HttpServletResponse response;</span><br><span class="line">    <span class="hljs-comment">// 类型校验</span></span><br><span class="line">	<span class="hljs-keyword">if</span> (!(req <span class="hljs-keyword">instanceof</span> HttpServletRequest &amp;&amp; </span><br><span class="line">          res <span class="hljs-keyword">instanceof</span> HttpServletResponse)) &#123;</span><br><span class="line">		<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ServletException(<span class="hljs-string">"non-HTTP request or response"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="hljs-comment">// 向下转型总是会成功的</span></span><br><span class="line">	request = (HttpServletRequest) req;</span><br><span class="line">	response = (HttpServletResponse) res;</span><br><span class="line">	<span class="hljs-comment">// 调用HttpServlet自定义的service(HttpServletRequset，HttpServletResponse)</span></span><br><span class="line">    service(request, response);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于Http类型的请求，servlet容器还是会调用原始的service方法，但是会在该方法中对request和response对象进行向下的类型转换，然后调用HttpServlet中自定义的service方法，与GenericServlet不同的是对于HttpServlet对象只需要重写doGet/doPost方法就可以处理对应的Get/Post类型的http请求</p>
+<p><strong>HttpServletRequst</strong>对象中多了几个针对http类型请求的方法：</p>
+<ul>
+<li>getContextPath：获取请求路径的URI</li>
+<li>getCookies：获取http请求中的所有Cookie对象，返回值为一个Cookie类型的数组</li>
+<li>getSession：获取http请求关联的HttpSession对象，如果不存在就创建一个新的</li>
+</ul>
+<p><strong>HttpServletResponse</strong>：</p>
+<ul>
+<li>addCookie ( Cookie cookie )：向http响应中添加一个Cookie对象用于跟踪用户状态</li>
+<li>sendRedirect ( String location)：重定向，参数可以是一个绝对路径或者相对路径</li>
+</ul>
+<h4 id="八-web-xml部署描述符"><a href="#八-web-xml部署描述符" class="headerlink" title="八. web.xml部署描述符"></a>八. web.xml部署描述符</h4><p>以上案例使用的都是<code>@WebServlet</code> 注解标识Servlet，也可以使用web.xml来配置Servlet的映射关系以及初始化参数等信息</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">web-app</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://java.sun.com/xml/ns/javaee"</span></span></span><br><span class="line"><span class="hljs-tag">         <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="hljs-tag">         <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">"http://java.sun.com/xml/ns/javaee</span></span></span><br><span class="line"><span class="hljs-tag"><span class="hljs-string">	      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"</span></span></span><br><span class="line"><span class="hljs-tag">         <span class="hljs-attr">version</span>=<span class="hljs-string">"3.0"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">&lt;!-- 指定servlet的名称和路径 --&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>contextServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>com.znker.servlet.ContextServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span></span><br><span class="line">        <span class="hljs-comment">&lt;!-- 这个值大于0的时候表示服务器在启动的时候就会初始化这个servlet而不是客户端第一次访问 --&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">load-on-startup</span>&gt;</span>10<span class="hljs-tag">&lt;/<span class="hljs-name">load-on-startup</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span></span><br><span class="line">    <span class="hljs-comment">&lt;!-- 配置servlet的映射路径，指定什么URL交由该servlet处理 --&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>contextServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/servletContext<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">web-app</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="九-Session管理"><a href="#九-Session管理" class="headerlink" title="九. Session管理"></a>九. Session管理</h4><p>HTTP协议是无状态的，在默认状态下，web服务器不知道一个http请求是来自用户首次访问还是来自之前已经访问过的用户，因此需要一种状态来保持用户状态。</p>
+<p><strong>Cookie</strong>：</p>
+<p>Cookie是自动地在web服务器和浏览器之间来回传递的一小块信息，cookie是作为http信息头嵌入的，因此它的传输过程由http协议处理，在服务端可以根据需求设置客户端cookie有效期限。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 创建Cookie对象</span></span><br><span class="line">Cookie cookie = <span class="hljs-keyword">new</span> Cookie(cookie_name, value);</span><br><span class="line"><span class="hljs-comment">// 将Cookie发送到浏览器</span></span><br><span class="line"><span class="hljs-comment">// 当浏览器再次发出对同一资源或者同一台服务器中的不同资源的请求时，它会同时把从服务端发来的cookie</span></span><br><span class="line"><span class="hljs-comment">// 在发送回去</span></span><br><span class="line">httpServletResponse.addCookie(cookie);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 在服务端访问客户端发来的Cookie中的信息</span></span><br><span class="line">Cookie[] cookies = request.getCookies();</span><br><span class="line">Cookie maxRecordsCookie = <span class="hljs-keyword">null</span>;</span><br><span class="line"><span class="hljs-keyword">if</span>(cookies != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">    <span class="hljs-comment">// 迭代Cookie数组</span></span><br><span class="line">    <span class="hljs-keyword">for</span>(Cookie cookie : cookies) &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span>(cookie.getName().equals(<span class="hljs-string">"maxRecords"</span>)) &#123;</span><br><span class="line">            maxRecordsCookie = cookie;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// Cookie类中没有可以直接删除cookie的方法，可以创建一个同名的Cookie去替换客户端的cookie</span></span><br><span class="line">Cookie cookie = <span class="hljs-keyword">new</span> Cookie(<span class="hljs-string">"login"</span>, <span class="hljs-string">""</span>);</span><br><span class="line">cookie.setMaxAge(<span class="hljs-number">0</span>);</span><br><span class="line">response.addCookie(cookie);</span><br></pre></td></tr></table></figure>
+<p><strong>HttpSession</strong>：</p>
+<p>HttpSession是当用户第一次访问某个网站的时候servlet容器自动创建的，通过在HttpRequest中调用<strong>getSession</strong>方法，可以获取用户的HttpSession，如果当前用户已经有与之关联的HttpSession了就返回这个对象，如果没有就创建一个新的HttpSession. 在HttpSession中可以用于存储键值对，这些信息是保存在服务端内存中的。</p>
+<p>Servlet容器为它所创建的每一个HttpSession生成一个唯一的标识符，并将这个标识符作为一个token发送到浏览器，一般是作为一个名为JSESSIONID的cookie，在后续的请求中，浏览器会将这个Cookie发送回服务端，服务端通过解析这个HttpSession来确定是哪个用户发送的请求，HttpSession的发送和解析是由servlet容器自动完成的。为了使HttpSession强制过期，可以调用invalidate方法，用户退出登录状态的时候就可以调用这个方法。</p>
+
+        </div>
+        
+        <hr style="height:1px;margin:1rem 0">
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/tags/JavaWeb/">JavaWeb</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/12/21/spring/spring-base-webmvc/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Spring基础：webmvc笔记</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/12/07/spring/spring-base-dependency-injection/">
+                <span class="level-item">Spring基础：依赖注入</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="http://znker-blog.oss-cn-hangzhou.aliyuncs.com/hexo-img/avatar.jpg" alt="Znker">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        Znker
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Java Developer
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Hangzhou, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        10
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        3
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        6
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/codeznker" target="_blank">
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="WeiBo" href="https://weibo.com/u/5764981017">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="WeChat" href="http://znker-blog.oss-cn-hangzhou.aliyuncs.com/hexo-img/WeChat-430x610.jpg">
+                
+                <i class="fab fa-weixin"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="http://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="JavaWeb编程基础：Servlet技术" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 Znker&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="codeznker" href="https://github.com/codeznker">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

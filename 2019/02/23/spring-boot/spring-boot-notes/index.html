@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>Spring Boot文档笔记 - 孤影</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="Spring Boot是目前非常流行的微服务框架，它倡导”约定优于配置”的理念，其设计目的就是为了简化Spring应用初始化搭建及开发过程，一个产品级的应用往往只需要极少Spring Boot配置就能运行起来">
+<meta name="keywords" content="Spring Boot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Boot文档笔记">
+<meta property="og:url" content="http://yoursite.com/2019/02/23/spring-boot/spring-boot-notes/index.html">
+<meta property="og:site_name" content="孤影">
+<meta property="og:description" content="Spring Boot是目前非常流行的微服务框架，它倡导”约定优于配置”的理念，其设计目的就是为了简化Spring应用初始化搭建及开发过程，一个产品级的应用往往只需要极少Spring Boot配置就能运行起来">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://znker-blog.oss-cn-hangzhou.aliyuncs.com/thumbnail/20191223-desk.jpg">
+<meta property="og:updated_time" content="2019-04-06T12:22:06.964Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring Boot文档笔记">
+<meta name="twitter:description" content="Spring Boot是目前非常流行的微服务框架，它倡导”约定优于配置”的理念，其设计目的就是为了简化Spring应用初始化搭建及开发过程，一个产品级的应用往往只需要极少Spring Boot配置就能运行起来">
+<meta name="twitter:image" content="https://znker-blog.oss-cn-hangzhou.aliyuncs.com/thumbnail/20191223-desk.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/atom_icon.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/tomorrow.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<!-- <body class="is-2-column"> -->
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="Spring Boot文档笔记" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/1024/06/06/about/">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="codeznker" href="https://github.com/codeznker">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="https://znker-blog.oss-cn-hangzhou.aliyuncs.com/thumbnail/20191223-desk.jpg" alt="Spring Boot文档笔记">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-02-22T16:00:00.000Z">2019-02-23</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Framework/">Framework</a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Spring Boot文档笔记
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>Spring Boot是目前非常流行的微服务框架，它倡导”约定优于配置”的理念，其设计目的就是为了简化Spring应用初始化搭建及开发过程，一个产品级的应用往往只需要极少Spring Boot配置就能运行起来</p>
+</blockquote>
+<a id="more"></a>
+<h4 id="一-Spring-Boot-初相识"><a href="#一-Spring-Boot-初相识" class="headerlink" title="一. Spring Boot 初相识"></a>一. Spring Boot 初相识</h4><p>Spring Boot使你能够创建独立的、可运行的产品级应用。Spring Boot对Spring生态中的第三方库进行了打包，使得开发者使用很少的配置就能完成应用的搭建过程。Spring Boot应用可以打包成一个jar包，然后在命令行中使用<code>java -jar</code>启动应用。Spring Boot的主要设计目的是：</p>
+<ul>
+<li>为所有的Spring应用提供一个快速的项目初始化过程</li>
+<li>提供了非常多的默认配置，但这些默认配置也是可以修改的</li>
+<li>提供了诸如内嵌web应用服务器、健康检查、外部化配置等特性</li>
+<li>不推荐使用xml的方式进行应用元数据配置</li>
+</ul>
+<p>开发环境需求，Spring Boot 2.0.8：</p>
+<ul>
+<li>java8</li>
+<li>Spring 5.0 +</li>
+<li>maven 3.2 +</li>
+<li>tomcat 8.5 / servlet 3.1</li>
+</ul>
+<p><strong>Spring Boot 应用的初始化</strong>：</p>
+<p>推荐使用maven初始化Spring Boot应用，在pom.xml中继承一个<code>spring-boot-starter-parent</code>的父工程，该项目对Spring应用中最常见的依赖项都提供了启动器starter，便于依赖管理；同时该项目还为应用提供了非常多的默认配置，极大的简化了应用的初始化过程</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">&lt;!-- 此处配置了maven项目的编码格式UTF-8，java编译级别为java8 --&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">properties</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">project.reporting.outputEncoding</span>&gt;</span>UTF-8<span class="hljs-tag">&lt;/<span class="hljs-name">project.reporting.outputEncoding</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">java.version</span>&gt;</span>1.8<span class="hljs-tag">&lt;/<span class="hljs-name">java.version</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">resource.delimiter</span>&gt;</span>@<span class="hljs-tag">&lt;/<span class="hljs-name">resource.delimiter</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">maven.compiler.source</span>&gt;</span>$&#123;java.version&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">maven.compiler.source</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">project.build.sourceEncoding</span>&gt;</span>UTF-8<span class="hljs-tag">&lt;/<span class="hljs-name">project.build.sourceEncoding</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">maven.compiler.target</span>&gt;</span>$&#123;java.version&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">maven.compiler.target</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">build</span>&gt;</span></span><br><span class="line">    <span class="hljs-comment">&lt;!-- 项目打包的时候将配置文件一并打包，这是在spring应用中必备的配置 --&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">resources</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">resource</span>&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">filtering</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">filtering</span>&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">directory</span>&gt;</span>$&#123;basedir&#125;/src/main/resources<span class="hljs-tag">&lt;/<span class="hljs-name">directory</span>&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">includes</span>&gt;</span></span><br><span class="line">                <span class="hljs-tag">&lt;<span class="hljs-name">include</span>&gt;</span>**/application*.yml<span class="hljs-tag">&lt;/<span class="hljs-name">include</span>&gt;</span></span><br><span class="line">                <span class="hljs-tag">&lt;<span class="hljs-name">include</span>&gt;</span>**/application*.yaml<span class="hljs-tag">&lt;/<span class="hljs-name">include</span>&gt;</span></span><br><span class="line">                <span class="hljs-tag">&lt;<span class="hljs-name">include</span>&gt;</span>**/application*.properties<span class="hljs-tag">&lt;/<span class="hljs-name">include</span>&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;/<span class="hljs-name">includes</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;/<span class="hljs-name">resource</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">resource</span>&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">directory</span>&gt;</span>$&#123;basedir&#125;/src/main/resources<span class="hljs-tag">&lt;/<span class="hljs-name">directory</span>&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">excludes</span>&gt;</span></span><br><span class="line">                <span class="hljs-tag">&lt;<span class="hljs-name">exclude</span>&gt;</span>**/application*.yml<span class="hljs-tag">&lt;/<span class="hljs-name">exclude</span>&gt;</span></span><br><span class="line">                <span class="hljs-tag">&lt;<span class="hljs-name">exclude</span>&gt;</span>**/application*.yaml<span class="hljs-tag">&lt;/<span class="hljs-name">exclude</span>&gt;</span></span><br><span class="line">                <span class="hljs-tag">&lt;<span class="hljs-name">exclude</span>&gt;</span>**/application*.properties<span class="hljs-tag">&lt;/<span class="hljs-name">exclude</span>&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;/<span class="hljs-name">excludes</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;/<span class="hljs-name">resource</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">resources</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">&lt;!-- 其它的插件管理 --&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>spring-boot-starter-parent</code> 项目继承自<code>spring-boot-dependencies</code> 父工程，该项目中配置了很多第三方库的依赖版本，后续引入jar包的就无需使用<code>&lt;version&gt;</code> 标签手动指定版本了。典型的pom.xml配置如下：</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">project</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="hljs-tag">         <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="hljs-tag">         <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">"http://maven.apache.org/POM/4.0.0</span></span></span><br><span class="line"><span class="hljs-tag"><span class="hljs-string">         http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">modelVersion</span>&gt;</span>4.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">&lt;!-- 项目坐标 --&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.znker.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>boot_demo<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.0.1-SNAPSHOT<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">packaging</span>&gt;</span>jar<span class="hljs-tag">&lt;/<span class="hljs-name">packaging</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">&lt;!-- 从父工程中继承spring boot默认的基础配置 --&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">parent</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.0.8.RELEASE<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="hljs-comment">&lt;!-- 通过启动器starter自动导入web项目依赖项 --&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">build</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">plugins</span>&gt;</span></span><br><span class="line">            <span class="hljs-comment">&lt;!-- maven插件 --&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span></span><br><span class="line">                <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">                <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;/<span class="hljs-name">plugins</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">build</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>应用编码</strong>：</p>
+<p>在默认情况下，maven从<code>src/main/java</code> 路径下编译项目源码，在该路径下创建文件夹<code>com.znker.demo</code> 用于存放项目源码<code>src/main/java/Example.java</code>：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// @RestController是复合注解，该注解除了将java类注解为一个控制器@Controller，</span></span><br><span class="line"><span class="hljs-comment">// 还告知spring将控制器中所有方法的返回对象全部序列化为json字符串返回</span></span><br><span class="line"><span class="hljs-meta">@RestController</span></span><br><span class="line"><span class="hljs-comment">// 开启自动配置</span></span><br><span class="line"><span class="hljs-meta">@EnableAutoConfiguration</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Example</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">// 映射http请求的URL</span></span><br><span class="line">    <span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">"/"</span>)</span><br><span class="line">    <span class="hljs-function">String <span class="hljs-title">home</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-string">"Hello Spring Boot!"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(Example.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>@RestController</code> 和<code>@RequestMapping</code> 注解都是Spring MVC中的注解，它们同样也适用于Spring Boot. <code>@RestController</code> 是一个复合注解，它告诉Spring将这个java注册为一个控制器，同时将该控制器中的所有方法的返回值序列化为一个json字符串返回给客户端，这样就无需使用以前的<code>@ResponseBody</code> 注解了。<code>RequestMapping</code> 注解提供了请求的”路由”信息，它告诉Spring按照http请求的路径信息将http请求映射到控制器中的方法上。</p>
+<p><code>@EnableAutoConfiguration</code> 是一个神奇的注解，它提供了应用自动配置的功能。这个注解告诉Spring Boot根据应用的依赖项去猜测开发者想要如何配置应用，由于项目中添加了<code>spring-boot-starter-web</code> 依赖，Spring Boot会自动加载很多已经配置好的默认配置信息，使用这些信息可以配置Spring MVC，开发者无需再手动创建繁琐的xml配置信息，解放了生产力！</p>
+<p>“main”方法是Spring Boot项目的应用入口，调用该方法启动项目的时候也启动了一个配置好的内嵌的tomcat服务器，可以对外提供服务。</p>
+<p><strong>启动应用</strong>：</p>
+<p>到这里项目就可以启动运行了，除了可以在IDE中启动项目之外，还可以使用maven命令行启动项目，在项目根目录下使用<code>mvn spring-boot:run</code> 命令就可以启动项目，当看到控制台输出类似下面的信息时，就代表项目已经启动了：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ mvn spring-boot:run</span><br><span class="line"></span><br><span class="line">  .   ____          _            __ _ _</span><br><span class="line"> /\\ / ___&apos;_ __ _ _(_)_ __  __ _ \ \ \ \</span><br><span class="line">( ( )\___ | &apos;_ | &apos;_| | &apos;_ \/ _` | \ \ \ \</span><br><span class="line"> \\/  ___)| |_)| | | | | || (_| |  ) ) ) )</span><br><span class="line">  &apos;  |____| .__|_| |_|_| |_\__, | / / / /</span><br><span class="line"> =========|_|==============|___/=/_/_/_/</span><br><span class="line"> :: Spring Boot ::  (v2.0.8.RELEASE)</span><br><span class="line">....... . . .</span><br><span class="line">....... . . . (log output here)</span><br><span class="line">....... . . .</span><br><span class="line">........ Started Example in 2.222 seconds (JVM running for 6.514)</span><br></pre></td></tr></table></figure>
+<p>此时在浏览器中输入<code>localhost:8080</code> 就可以访问项目了，会得到<code>Hello Spring Boot!</code>，这就是一个可运行的完整的web项目，抛弃了以前Spring中的一大堆繁琐的xml配置，真好！</p>
+<p>可以在pom.xml文件中引入maven插件，这样就可以将项目打包<code>mvn package</code>为一个可执行的jar文件用于应用部署：</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">build</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">plugins</span>&gt;</span></span><br><span class="line">        <span class="hljs-comment">&lt;!-- maven插件 --&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">plugins</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>使用<code>java -jar boot_demo-1.0.1-SNAPSHOT.jar</code> 命令就可以启动应用了。</p>
+<h4 id="二-详解Spring-Boot的使用"><a href="#二-详解Spring-Boot的使用" class="headerlink" title="二. 详解Spring Boot的使用"></a>二. 详解Spring Boot的使用</h4><p>本节主要介绍Spring Boot的使用细节和最佳实践</p>
+<p><strong>依赖管理</strong>：</p>
+<p>使用maven进行依赖管理Spring Boot项目初始化的最佳实践是继承<code>spring-boot-starter-parent</code> 父工程，该项目为Spring Boot提供了很多的特性：</p>
+<ul>
+<li>使用java 1.8作为默认的源码编译级别</li>
+<li>使用UTF-8作为源码的编码方式</li>
+<li>从<code>spring-boot-dependencies</code> 项目中继承依赖项版本设置，在后续引入依赖项的时候无需再指定版本</li>
+<li>自动识别项目配置文件，application.yml，application.properties这样的配置文件会被Spring Boot自动识别并打包到jar中去</li>
+</ul>
+<p><strong>启动器Starters</strong>：</p>
+<p>Starters是一系列便于使用的依赖项描述文件，使用starters可以”一站式”地引入Spring以及相关技术的依赖项，而无需再到处copy它们的maven坐标。比如开发者想要在应用中引入jpa进行持久化操作，只需要在pom.xml文件中添加<code>spring-boot-starter-data-jpa</code> 依赖描述文件即可，maven会分析依赖关系，然后自动地导入所需jar包，所有的Spring Boot官方的starter都以<code>spring-boot-starter-*</code> 形式命名，具体信息参考文档。</p>
+<p><strong>应用代码的布局</strong>：</p>
+<p>Spring Boot无需特定的代码布局方式，但是有最佳实践。如果在类路径下没有什么package时，Spring Boot会将源文件都打包到一个<code>default package</code> 中去，但是不要这样做！这会导致<code>@ComponentScan</code> 和<code>@SpringBootApplication</code> 注解失效。最佳的实践是将项目中的源代码放到类似这样的目录结构下<code>com.example.project</code>.</p>
+<p>对于Spring Boot项目的启动类Main Application推荐放到<code>com.example.project</code> 目录的根目录下，这样便于<code>@ComponentScan</code> 注解从当前路径下扫描并注册Bean，最佳实践的例子如下，注意启动类的位置：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">com</span><br><span class="line"> +- example</span><br><span class="line">     +- myapplication</span><br><span class="line">         +- Application.java</span><br><span class="line">         |</span><br><span class="line">         +- customer</span><br><span class="line">         |   +- Customer.java</span><br><span class="line">         |   +- CustomerController.java</span><br><span class="line">         |   +- CustomerService.java</span><br><span class="line">         |   +- CustomerRepository.java</span><br><span class="line">         |</span><br><span class="line">         +- order</span><br><span class="line">             +- Order.java</span><br><span class="line">             +- OrderController.java</span><br><span class="line">             +- OrderService.java</span><br><span class="line">             +- OrderR、epository.java</span><br></pre></td></tr></table></figure>
+<p><strong>配置元数据类<code>@Configuration</code>类</strong>：</p>
+<p>Spring Boot推荐基于java类的配置方式，尽管也可是使用基于xml的配置方式<code>@ImportResource</code> ，但是不推荐这样做。项目中可以有多个带有<code>@Configuration</code> 注解的java配置类，可以使用<code>@Import</code> 注解将其他配置类导入到主配置类中，或者也可以在启动类上使用<code>@ComponentScan</code> 注解，它会自动扫描并加载java配置类信息，所有带有<code>@Component</code> 注解的类会被注册为容器中的Bean，同时java配置类中带有<code>@Bean</code>注解的方法的返回值也会被自动注册为容器中的Bean.</p>
+<p>如果无可避免地要使用基于xml的配置方式，推荐创建一个java配置类，然后在配置类上使用注解<code>@ImportResource</code> 去加载指定的xml配置文件，同时xml文件中的配置的组件也会被注册为容器中的Bean</p>
+<p><strong>自动配置Auto-configuration</strong>：</p>
+<p>Spring Boot会根据项目依赖的jar包尝试去自动配置项目，推荐在<code>@EnableAutoConfiguration</code> 或<code>SpringBootApplication</code> 中选一个添加到主配置类<code>@Configuration</code> 上，这样就开启了自动配置。自动配置是非侵入式的，在任何时候你都可以定义自己的配置信息来替换自动配置的信息。</p>
+<p><strong>依赖注入</strong>：</p>
+<p>Bean的定义和依赖注入Injection是Spring中核心，在Spring Boot中同样可以使用Spring IoC中技术。简而言之，<code>@ComponentScan</code> 注解的组件扫描和<code>@Autowired</code> 注解的依赖注入描述在Spring Boot同样有效。</p>
+<p>如果你使用最佳实践中的代码布局方式，将启动类放在<code>root package</code> 下，那么<code>@ComponentScan</code> 注解无需任何参数就能自动扫描并加载源码中带有<code>@Component</code> 注解及其派生注解（<code>@Controller</code>，<code>@Service</code>，<code>Repository</code>）的类，并将其注册为容器中的Bean，同时也会将带有<code>@Configuration</code> 注解的java配置类中定义的Bean注册到Spring容器中</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 注册为容器中的Bean</span></span><br><span class="line"><span class="hljs-meta">@Service</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DatabaseAccountService</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">AccountService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> RiskAssessor riskAssessor;</span><br><span class="line">	</span><br><span class="line">    <span class="hljs-comment">// 构造函数注入</span></span><br><span class="line">	<span class="hljs-meta">@Autowired</span></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">DatabaseAccountService</span><span class="hljs-params">(RiskAssessor riskAssessor)</span> </span>&#123;</span><br><span class="line">		<span class="hljs-keyword">this</span>.riskAssessor = riskAssessor;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>使用<code>@SpringBootApplication</code>注解</strong>：</p>
+<p>对于使用Spring Boot的开发者而言，自动配置、组件扫描以及加载额外的配置信息都是非常通用的需求，为了默认开启这三种特性，可以在项目启动类上使用<code>@SpringBootApplication</code> 注解，这是一个复合注解，它由三个注解组成：</p>
+<ul>
+<li><code>@EnableAutoConfiguration</code>：该注解用于开启Spring Boot的自动配置功能</li>
+<li><code>@ComponentScan</code>：该注解用于开启组件扫描，加载<code>@Component</code> 和<code>@Configuration</code> 类，默认的起始扫描路径启动类所在的目录，所以建议启动类放在<code>root package</code> 下</li>
+<li><code>@Configuration</code>：将启动类注册为项目中的主配置类，可以在启动类中使用工厂方法配合<code>@Bean</code>注解手动注册组件，也可以使用<code>@Import</code> 注解手动导入其它java配置类，或者使用<code>@ImportResource</code> 注解加载由xml文件定义的Bean组件</li>
+</ul>
+<p>这些特性并不是强制的，比如你不想使用组件扫描，那么可以使用java配置类定义项目中所有的组件，并且使用手动描述它们之间的依赖关系，然后在启动类上使用<code>@Import</code> 注解导入所有自定义的java配置类信息</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// java配置类</span></span><br><span class="line"><span class="hljs-meta">@Configuration</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyConfig</span> </span>&#123;</span><br><span class="line">	<span class="hljs-comment">// 将返回的对象注册为容器中的Bean</span></span><br><span class="line">    <span class="hljs-meta">@Bean</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> ExampleController <span class="hljs-title">exampleController</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        ExampleController bean = <span class="hljs-keyword">new</span> ExampleController();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">return</span> bean;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">@Configuration</span></span><br><span class="line"><span class="hljs-meta">@EnableAutoConfiguration</span></span><br><span class="line"><span class="hljs-comment">// 不开启组件扫描，手动加载所有java配置类</span></span><br><span class="line"><span class="hljs-meta">@Import</span>(&#123;MyConfig.class&#125;)</span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ExampleMainApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(ExampleMainApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="三-开发Web应用"><a href="#三-开发Web应用" class="headerlink" title="三. 开发Web应用"></a>三. 开发Web应用</h4><p>Spring Boot非常适合做web服务端的开发，可以使用tomcat，jetty做内嵌的服务器。大部分Spring Boot应用都需要引入<code>spring-boot-starter-web</code> 模块来快速搭建应用框架。Spring Boot中可以使用Spring MVC中的技术，可以使用<code>@Controlle</code>r或者<code>@RestController</code> 注解来标识控制器，这些控制器可以用于处理客户端的http请求，在控制器中可以使用<code>@RequestMapping</code> 注解来映射请求路径URL</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@RestController</span></span><br><span class="line"><span class="hljs-meta">@RequestMapping</span>(value=<span class="hljs-string">"/users"</span>)</span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyRestController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-meta">@RequestMapping</span>(value=<span class="hljs-string">"/&#123;user&#125;"</span>, method=RequestMethod.GET)</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> User <span class="hljs-title">getUser</span><span class="hljs-params">(@PathVariable Long user)</span> </span>&#123;</span><br><span class="line">		<span class="hljs-comment">// ...</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-meta">@RequestMapping</span>(value=<span class="hljs-string">"/&#123;user&#125;/customers"</span>, method=RequestMethod.GET)</span><br><span class="line">	<span class="hljs-function">List&lt;Customer&gt; <span class="hljs-title">getUserCustomers</span><span class="hljs-params">(@PathVariable Long user)</span> </span>&#123;</span><br><span class="line">		<span class="hljs-comment">// ...</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-meta">@RequestMapping</span>(value=<span class="hljs-string">"/&#123;user&#125;"</span>, method=RequestMethod.DELETE)</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> User <span class="hljs-title">deleteUser</span><span class="hljs-params">(@PathVariable Long user)</span> </span>&#123;</span><br><span class="line">		<span class="hljs-comment">// ...</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Web应用中的自动配置</strong>：</p>
+<p>Spring Boot为Sprring MVC提供了很多默认配置，这些配置对于大多数web应用都适用：</p>
+<ul>
+<li>自动注册<code>ContentNegotiatingViewResolver</code> 和<code>BeanNameViewResolver</code> 视图解析器</li>
+<li>支持输出静态资源，包括WebJars</li>
+<li>自动注册<code>Converter</code>，<code>GenericConverter</code> 和<code>Formater</code> 组件</li>
+<li>支持使用<code>HttpMessageConverters</code> 类型的组件完成消息转换</li>
+<li>自动注册<code>MessageCodesResolver</code> 组件</li>
+<li>静态欢迎页<code>index.html</code></li>
+<li>自动注册<code>ConfigurableWebBindingInitializer</code> 组件</li>
+</ul>
+<p>如果想要保持SpringMVC的特性，并且添加其他的mvc配置（拦截器、格式化器、视图解析器….），此时可以自己实现一个<code>WebMvcConfigurer</code> 类，在类上添加<code>@Configuration</code> 注解，Spring Boot会使用这个类中的配置作为Spring MVC的配置，但是此时不能再使用<code>@EnableWebMvc</code>，因为这个注解是开启默认配置的。</p>
+<p><strong>HttpMessageConverters</strong>：</p>
+<p>Spring MVC使用HttpMessageConverter接口来实现转换http请求和响应中的信息，例如当引入Jackson工具包后，处理器中返回的对象可以自动地转换为JSON字符串<code>@ResponseBody/@RestController</code> , 并且默认的编码格式是UTF-8，以前在Spring MVC还需要在配置文件手动配置消息转换器</p>
+
+        </div>
+        
+        <hr style="height:1px;margin:1rem 0">
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/tags/Spring-Boot/">Spring Boot</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/01/05/mybatis/mybatis-base-configuration/">
+                <span class="level-item">MyBatis基础：组件与配置</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="http://znker-blog.oss-cn-hangzhou.aliyuncs.com/hexo-img/avatar.jpg" alt="Znker">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        Znker
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Java Developer
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Hangzhou, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        10
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        3
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        6
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/codeznker" target="_blank">
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="WeiBo" href="https://weibo.com/u/5764981017">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="WeChat" href="http://znker-blog.oss-cn-hangzhou.aliyuncs.com/hexo-img/WeChat-430x610.jpg">
+                
+                <i class="fab fa-weixin"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="http://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+<div class="card widget column-left is-sticky" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#一-Spring-Boot-初相识">
+        <span class="has-mr-6">1</span>
+        <span>一. Spring Boot 初相识</span>
+        </a></li><li>
+        <a class="is-flex" href="#二-详解Spring-Boot的使用">
+        <span class="has-mr-6">2</span>
+        <span>二. 详解Spring Boot的使用</span>
+        </a></li><li>
+        <a class="is-flex" href="#三-开发Web应用">
+        <span class="has-mr-6">3</span>
+        <span>三. 开发Web应用</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="Spring Boot文档笔记" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 Znker&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="codeznker" href="https://github.com/codeznker">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

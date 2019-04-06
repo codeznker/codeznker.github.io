@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>Spring基础：依赖注入 - 孤影</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="Spring轻量级容器技术为管理应用中的组件提供了非常棒的方法，已经成为java服务端开发事实上的标准">
+<meta name="keywords" content="Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring基础：依赖注入">
+<meta property="og:url" content="http://yoursite.com/2018/12/07/spring/spring-base-dependency-injection/index.html">
+<meta property="og:site_name" content="孤影">
+<meta property="og:description" content="Spring轻量级容器技术为管理应用中的组件提供了非常棒的方法，已经成为java服务端开发事实上的标准">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://znker-blog.oss-cn-hangzhou.aliyuncs.com/thumbnail/20181207-charactors.png">
+<meta property="og:updated_time" content="2019-04-06T12:02:48.890Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring基础：依赖注入">
+<meta name="twitter:description" content="Spring轻量级容器技术为管理应用中的组件提供了非常棒的方法，已经成为java服务端开发事实上的标准">
+<meta name="twitter:image" content="https://znker-blog.oss-cn-hangzhou.aliyuncs.com/thumbnail/20181207-charactors.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/atom_icon.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/tomorrow.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<!-- <body class="is-2-column"> -->
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="Spring基础：依赖注入" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/1024/06/06/about/">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="codeznker" href="https://github.com/codeznker">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="https://znker-blog.oss-cn-hangzhou.aliyuncs.com/thumbnail/20181207-charactors.png" alt="Spring基础：依赖注入">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-12-06T16:00:00.000Z">2018-12-07</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Framework/">Framework</a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Spring基础：依赖注入
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>Spring轻量级容器技术为管理应用中的组件提供了非常棒的方法，已经成为java服务端开发事实上的标准</p>
+</blockquote>
+<a id="more"></a>
+<h4 id="一-Spring概述"><a href="#一-Spring概述" class="headerlink" title="一. Spring概述"></a>一. Spring概述</h4><p>Spring是一种轻量级的容器化技术Container，它的核心概念是控制反转IoC和依赖注入DI。在spring容器中，应用程序中的组件<code>@Component</code>被创建、装配彼此间依赖关系，并以一种“开箱即用”的方式对外提供组件获取服务。作为容器，最基本的功能应该有：</p>
+<ul>
+<li>组件Bean的生命周期管理：组件的创建与初始化，这也是容器技术最核心的功能</li>
+<li>依赖解析：容器中的Bean是互相依赖，容器应该能解析组件之间的依赖关系并完成依赖项的装配</li>
+<li>组件查找：容器应该对外提供接口，使得程序能够从容器中获取容器管理的组件对象getBean(“xxx”)</li>
+<li>应用程序的配置：应该如何将程序中的java类定义为容器中的组件，如何描述组件之间的依赖关系，这些也是容器技术中不可或缺的。一般使用某种配置方式（xml或注解），容器可以从这些配置项中获取组件的配置信息，解析配置信息，创建组件并完成依赖项的装配<code>@Autowired</code></li>
+</ul>
+<p><strong>控制反转</strong>：</p>
+<p>控制反转是spring中的核心概念，spring容器的工作原则是创建这些组件以及所依赖的组件，并将这些组件装配在一起。对依赖项的控制由组件本身转移到容器，这种模式被称为<strong>控制反转</strong>（Inversion  of  Controll）。</p>
+<p><strong>依赖注入</strong>：</p>
+<p>依赖注入的基本原则是应用中的组件不应该自己查找它们所依赖的组件，而是由spring容器创建组件对象并完成依赖项的注入，从而导致资源查找的外部化（xml配置文件或者注解）。</p>
+<h4 id="二-依赖注入"><a href="#二-依赖注入" class="headerlink" title="二. 依赖注入"></a>二. 依赖注入</h4><p><strong>1. Spring IoC容器：</strong></p>
+<p>使用spring容器技术的关键是：</p>
+<ul>
+<li>如何将系统中的需要由容器管理的java对象注册为容器的中组件Bean，就是如何定义Bean组件，主要有三种方式：xml配置文件、注解驱动开发和使用基于java配置类<code>@Configuration</code>、<code>@Bean</code>定义组件信息</li>
+<li>依赖解析：如何解析容器中Bean的依赖关系，如何自动装配容器中组件的依赖项<code>@Autowired</code></li>
+</ul>
+<p><strong>配置元数据的传统格式是XML</strong>，可以在xml配置文件中定义Bean，描述组件之间的依赖关系，spring容器在启动的时候会加载xml配置文件，解析组件之间的依赖关系，完成组件依赖项的注入，这正是spring容器技术的提供的强大功能！如果使用基于xml的配置方法，那么在<strong>组件中依赖项的属性必须提供setter()方法！</strong>注解驱动的模式下无需提供setter方法，只需要<code>@Autowired</code>注解即可完成自动装配！</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">beans</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="hljs-tag">       <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="hljs-tag">       <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">"http://www.springframework.org/schema/beans </span></span></span><br><span class="line"><span class="hljs-tag"><span class="hljs-string">       http://www.springframework.org/schema/beans/spring-beans.xsd"</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">    <span class="hljs-comment">&lt;!-- bean标签告知spring容器将这个类的实例注册为容器中的Bean --&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"accountService"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"com.znker.service.impl.AccountServiceImpl"</span>&gt;</span></span><br><span class="line">        <span class="hljs-comment">&lt;!-- 该对象有一个AccountDao类型的属性，此处使用ref标签引用容器中的一个对象注入到bean中--&gt;</span></span><br><span class="line">        <span class="hljs-comment">&lt;!-- 因为没有使用注解驱动开发模式，所以此时需要为accountDao属性提供setter方法 --&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"accountDao"</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"accountDao"</span>/&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"accountDao"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"com.znker.dao.impl.AccountDaoInMemoryImpl"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>Spring容器本身也是一个对象</strong>，需要在特定的时间点被创建，用于管理应用中的其它对象。在非web环境的独立应用中使用java编程的方式手动实例化spring容器，而在Web应用中可以在web.xml配置文件中声明spring容器对象，系统启动时会创建一个ApplicationContext类型的容器</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainXmlBase</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="hljs-comment">// 实例化一个使用xml配置文件定义的spring容器对象</span></span><br><span class="line">        ClassPathXmlApplicationContext applicationContext =</span><br><span class="line">                <span class="hljs-keyword">new</span> ClassPathXmlApplicationContext(<span class="hljs-string">"classpath:spring/applicationContext.xml"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// Bean查找，从容器中获取开箱即用的bean对象，这些bean对象已经完成了依赖项的注入</span></span><br><span class="line">        AccountService accountService = applicationContext.getBean(<span class="hljs-string">"accountService"</span>, AccountService.class);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>使用基于java注解的配置元数据</strong>，这也是流行的ssm开发模式的配置方式。Spring提供了<code>@Component</code> 注解，在应用中的类上加上这个注解表示需要将这个类的一个实例注册为容器中的Bean，该注解还有三个派生注解<code>@Controller</code>、<code>@Service</code>、<code>@Repository</code>，它们和<code>@Component</code> 的功能是一样的。因为无需手动在xml中定义bean，此时可以使用<code>@Autowired</code> 注解来描述组件之间的依赖关系，Spring容器在初始化的时候会解析这些依赖关系并完成依赖项的自动装配</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 当spring容器看到这两个注解的时候，就会实例化一个它们的对象注册到容器中</span></span><br><span class="line"><span class="hljs-comment">// Bean的名称默认为类名的首字母小写</span></span><br><span class="line"><span class="hljs-meta">@Service</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AccountServiceImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">AccountService</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">// 描述依赖关系</span></span><br><span class="line">    <span class="hljs-meta">@Autowired</span></span><br><span class="line">    <span class="hljs-keyword">private</span> AccountDao accountDao;</span><br><span class="line">    <span class="hljs-comment">// other code...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">@Repository</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AccountDaoInMemoryImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">AccountDao</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">// other code...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">beans</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="hljs-tag">       <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="hljs-tag">       <span class="hljs-attr">xmlns:context</span>=<span class="hljs-string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="hljs-tag">       <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">"http://www.springframework.org/schema/beans </span></span></span><br><span class="line"><span class="hljs-tag"><span class="hljs-string">       http://www.springframework.org/schema/beans/spring-beans.xsd </span></span></span><br><span class="line"><span class="hljs-tag"><span class="hljs-string">       http://www.springframework.org/schema/context </span></span></span><br><span class="line"><span class="hljs-tag"><span class="hljs-string">       http://www.springframework.org/schema/context/spring-context.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">&lt;!-- 开启注解扫描，将加了@Component及其派生注解的类注册为容器中的Bean，注解扫描会逐层</span></span><br><span class="line"><span class="hljs-comment">		 扫描指定包及其子包下的所有类，尝试识别带有@Component的类。同时根据@Autowired注解解析</span></span><br><span class="line"><span class="hljs-comment">		 依赖关系，完成依赖项的装配 --&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">context:component-scan</span> <span class="hljs-attr">base-package</span>=<span class="hljs-string">"com.znker"</span>/&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>使用基于java类的配置元数据</strong>，这应该是现在最流行的配置方式了，因为Spring Boot正是基于此技术开发的。基于java类的配置元数据舍弃了繁琐的xml配置文件，使用带有<code>@Configuration</code>注解的java类告知容器这是一个带有配置元数据的配置类，解析这个类可以获取配置信息及组件的依赖关系，使用<code>@Bean</code>注解将配置类中方法的返回对象注册为容器中的Bean。默认的情况下，系统的中Bean都是单实例的singleton，方法的多次调用并不会创建多个实例，这是由spring容器所保证的，细节待究</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 告知Spring容器这是一个配置类Bean，解析该类可以获取配置元数据</span></span><br><span class="line"><span class="hljs-meta">@Configuration</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Ch2BeanConfiguration</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// @Bean注解告知容器将方法的返回值注册为容器中的Bean，这些方法在容器启动的时候被调用</span></span><br><span class="line">    <span class="hljs-comment">// 这相当于在xml文件中定义&lt;bean&gt;组件和描述组件依赖关系</span></span><br><span class="line">    <span class="hljs-meta">@Bean</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> AccountService <span class="hljs-title">accountService</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        AccountServiceImpl bean = <span class="hljs-keyword">new</span> AccountServiceImpl();</span><br><span class="line">        <span class="hljs-comment">// 手动定义组件之间的依赖关系，依赖注入的属性需要提供setter方法</span></span><br><span class="line">        bean.setAccountDao(accountDao());</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-keyword">return</span> bean;</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    <span class="hljs-comment">// 默认情况下方法的名称就是返回对象的名称，默认情况的Bean都是单实例的</span></span><br><span class="line">    <span class="hljs-meta">@Bean</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> AccountDao <span class="hljs-title">accountDao</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        AccountDaoInMemoryImpl bean = <span class="hljs-keyword">new</span> AccountDaoInMemoryImpl();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">return</span> bean;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainJavaBase</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="hljs-comment">// 实例化spring容器的方式和xml配置元数据的方式不同，传入的参数是一个配置类</span></span><br><span class="line">        AnnotationConfigApplicationContext applicationContext =</span><br><span class="line">                <span class="hljs-keyword">new</span> AnnotationConfigApplicationContext(Ch2BeanConfiguration.class);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">// other code...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在基于java类的配置下，注解<code>@ComponentScan</code> 可以在配置类上指定注解扫描的包，相当于在xml文件中配置<code>&lt;context:component-scan base-package=&quot;com.znker&quot;/&gt;</code>，这样就不需要使用带有<code>@Bean</code> 注解的工厂方法来手动定义应用的的Bean组件了，使用<code>@Component</code> 注解标识Bean组件更加方便，<code>@Bean</code>注解一般用于标注第三方组件的获取，例如RestTemplate. 此时就是将基于注解的方式和基于java配置类的方式组合起来使用。</p>
+<p><strong>2. 依赖注入</strong>：</p>
+<p>Spring容器依赖注入主要有两种方式：setter方法注入和构造函数注入。<strong>setter方法注入</strong>是在Bean实例创建完毕之后执行的，setter方法注入需要为被注入的属性提供setter方法，在传统的xml模式的配置方式下使用，但是在注解驱动已经成为主流的现在，setter注入不在推荐使用。setter注入除了可以注入对象外，还可以注入value或集合对象<code>@Value</code></p>
+<p>构造函数注入需要为Bean提供构造函数，参数为需要注入的属性，也不推荐使用。</p>
+<p><strong>依赖解析的过程</strong>：spring容器的启动主要分为两个阶段，首先容器先加载配置元数据；然后完成Bean的创建，注入各个组件所需要的依赖项。一个Bean在被完全创建且自己所有的依赖项被注入之前是不会作为一个依赖项被注入到其他Bean中去的，这正是为何spring容器可以做到组件的开箱即用！！！</p>
+<p><strong>自动装配</strong>：有时无需显式地在Bean的定义中定义依赖项，可以让spring容器自动地向Bean中注入依赖项，该过程称为自动装配<code>@Autowired</code>。自动装配有三种模式：byType、byName、constructor，在byType模式下，spring通过反射技术查看Bean依赖的属性类型，然后从容器中尝试寻找和属性类型匹配的依赖项注入！</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">&lt;!-- 这是基于xml元数据的方式配置自动装配，在没有开启注解时这种模式下spring容器是不会去识别注解的，</span></span><br><span class="line"><span class="hljs-comment">     依赖项的属性必须提供setter方法完成依赖注入！</span></span><br><span class="line"><span class="hljs-comment">     byType是按类型注入的，其原理是java使用反射技术获取属性的类型，然后去容器中查找</span></span><br><span class="line"><span class="hljs-comment">     类型匹配的Bean完成注入，此时无需使用ref标签描述依赖项--&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"accountService"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"com.znker.service.impl.AccountServiceImpl"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">autowire</span>=<span class="hljs-string">"byType"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"accountDao"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"com.znker.dao.impl.AccountDaoInMemoryImpl"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在基于java和基于注解的开发模式下，可以在组件属性上放置<code>@Autowired</code> 注解，这样就不需要为属性注入编写Setter方法了，此时spring利用反射技术api对字段进行直接访问，完成依赖项的注入操作（基本都用这种方法）。</p>
+<p>以上都是装配的对象，有的时候要装配基本类型的值，比如数据连接参数通常是字符串。可以在xml配置文件中添加<code>&lt;context:property-placeholder location=&quot;classpath:db.properties&quot;/&gt;</code> 或者在java配置类上使用注解<code>@ImportResource(&quot;classpath:/com/acme/properties-config.xml&quot;)</code> 引入属性文件，然后在java类的属性上使用<code>@Value(&quot;${fooName}&quot;)</code> 注解获取配置项的值，完成依赖注入。</p>
+<p><strong>3. Spring容器管理Bean</strong>：</p>
+<p>被spring容器创建和管理的java对象称为Bean，容器中的Bean通过id或name进行区分，如果开发者没有显式命名Bean，容器将会为Bean分配一个内部名称。<code>@Component</code> 注解接收一个String值作为Bean的名称，如果没有提供，将使用类名首字母小写作为Bean的名称</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Configuration</span></span><br><span class="line"><span class="hljs-meta">@ComponentScan</span>(&#123;<span class="hljs-string">"com.znker"</span>&#125;)</span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Ch2BeanConfiguration</span> </span>&#123;</span><br><span class="line">	<span class="hljs-comment">// name元素可以给Bean赋值多个名称值</span></span><br><span class="line">    <span class="hljs-meta">@Bean</span>(name = &#123;<span class="hljs-string">"accountDao, accountDaoInMemory"</span>&#125;)</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> AccountDao <span class="hljs-title">foo</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        AccountDaoInMemoryImpl bean = <span class="hljs-keyword">new</span> AccountDaoInMemoryImpl();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">return</span> bean;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Bean的作用域scope</strong>：默认情况下，由spring容器创建的Bean的生命周期都是singleton单例模式的，换句话说一个Bean定义在容器中只有一个Bean实例！第二种作用域是prototype，类似于在代码中使用new操作符创建对象，每当从容器中获取Bean的时候，返回的都是一个新的Bean实例。Spring2.5中针对web环境还增加了request作用域和session作用域。</p>
+<h4 id="三-小结"><a href="#三-小结" class="headerlink" title="三. 小结"></a>三. 小结</h4><p>本节主要讨论了如何在容器中定义Bean组件<code>@Component</code>，如何装配Bean组件之间的依赖关系<code>@Autowired</code>. 传统的基于xml配置元数据的方法，需要在xml文件中定义所有Bean组件，使用<strong>ref标签</strong>描述依赖关系，同时需要在java类中为依赖注入的属性提供setter方法，因为这个过程过于繁琐，已经不推荐再使用。基于注解驱动开发的模式大大简化了Bean定义和依赖描述的过程。<code>@Component</code> 注解及其派生注解可以将java类自动注册为容器中的Bean，<code>@Autowired</code> 注解用于描述依赖关系，无需再提供setter方法，但要记得开启注解扫描<code>&lt;context:component-scan base-package=&quot;com.znker&quot;/&gt;</code>。</p>
+<p>而对于一些第三方组件，比如DataSource、RedisTemplate等都可以在xml中手动配置Bean。但是在Spring Boot已然成为大趋势的现在，基于java类的元数据配置方式越来越流行，<code>@Configuration</code> 注解标识的定义类相当于xml配置文件，<code>@Bean</code> 表示的方法返回的对象会被自动注册为容器中的Bean，<code>@ComponentScan</code> 相当于开启了注解扫描，抛弃繁琐的xml配置文件真好！</p>
+
+        </div>
+        
+        <hr style="height:1px;margin:1rem 0">
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/tags/Spring/">Spring</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/12/13/javaweb/javaweb-base-servlet/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">JavaWeb编程基础：Servlet技术</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/11/15/mysql/mysql-memo/">
+                <span class="level-item">MySQL备忘录</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="http://znker-blog.oss-cn-hangzhou.aliyuncs.com/hexo-img/avatar.jpg" alt="Znker">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        Znker
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Java Developer
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Hangzhou, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        10
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        3
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        6
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/codeznker" target="_blank">
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="WeiBo" href="https://weibo.com/u/5764981017">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="WeChat" href="http://znker-blog.oss-cn-hangzhou.aliyuncs.com/hexo-img/WeChat-430x610.jpg">
+                
+                <i class="fab fa-weixin"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="http://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="Spring基础：依赖注入" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 Znker&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="codeznker" href="https://github.com/codeznker">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

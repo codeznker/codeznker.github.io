@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>Java基础笔记：基本语法 - 孤影</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="java基本语法：数据类型、变量、数组、控制语句，这些都是java语法中最基础的概念">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java基础笔记：基本语法">
+<meta property="og:url" content="http://yoursite.com/2018/10/03/java/java-base-grammer/index.html">
+<meta property="og:site_name" content="孤影">
+<meta property="og:description" content="java基本语法：数据类型、变量、数组、控制语句，这些都是java语法中最基础的概念">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://znker-blog.oss-cn-hangzhou.aliyuncs.com/thumbnail/20181003-landscape.jpg">
+<meta property="og:updated_time" content="2019-04-06T07:52:25.257Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java基础笔记：基本语法">
+<meta name="twitter:description" content="java基本语法：数据类型、变量、数组、控制语句，这些都是java语法中最基础的概念">
+<meta name="twitter:image" content="http://znker-blog.oss-cn-hangzhou.aliyuncs.com/thumbnail/20181003-landscape.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/atom_icon.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/tomorrow.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<!-- <body class="is-2-column"> -->
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="Java基础笔记：基本语法" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/1024/06/06/about/">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="codeznker" href="https://github.com/codeznker">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="http://znker-blog.oss-cn-hangzhou.aliyuncs.com/thumbnail/20181003-landscape.jpg" alt="Java基础笔记：基本语法">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-02T16:00:00.000Z">2018-10-03</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Language/">Language</a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Java基础笔记：基本语法
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>java基本语法：数据类型、变量、数组、控制语句，这些都是java语法中最基础的概念</p>
+</blockquote>
+<a id="more"></a>
+<h4 id="一-Java语言简介"><a href="#一-Java语言简介" class="headerlink" title="一. Java语言简介"></a>一. Java语言简介</h4><p><strong>java的起源</strong>：1991年Sun公司的 James Gosling 和同事开始着手开发一门被称为Oak的编程语言（1995年更名为Java），java起初是被用于嵌入各种消费类电子产品中的（微波炉、机顶盒…），由于这些电子产品的cpu各不相同，所以java的设计初衷是可移植、平台独立、适用于各种类型cpu环境下的编程工作</p>
+<p><strong>java的兴起</strong>：java的出现正值万维网浪潮的兴起，也正是随着万维网的发展，java逐渐兴起并成为Web服务端开发最流行的编程语言！</p>
+<p><strong>字节码</strong>：java源代码经过编译器编译之后成为字节码bytecode，字节码是高度优化的指令集合，这些指令由java虚拟机执行。字节码文件可以运行在针对指定操作系统而专门设计的java虚拟机中，这正是java实现跨平台的基础</p>
+<p><strong>java的一些特性</strong>：</p>
+<ul>
+<li>简单：java继承了很多c/c++的语法特性，但是舍弃了很多比较难用的特性，比如指针和垃圾回收</li>
+<li>面向对象：在java中除了基本类型之外，其它的一切都是对象，正真的“万物皆对象”</li>
+<li>多线程：java在语言层面提供了对多线程的支持</li>
+<li>健壮性：java是强类型的语言，在编译的时候会进行类型兼容性检查，及时发现代码中的兼容性问题，同时java对程序员屏蔽了内存管理，使得开发者可以无需手动分配和释放内存资源</li>
+</ul>
+<h4 id="二-Java语言基础"><a href="#二-Java语言基础" class="headerlink" title="二. Java语言基础"></a>二. Java语言基础</h4><p>面向对象编程（Object-Oriented Programming）是java的核心，相对于面向对象的是面向过程（c/c++），它将程序描述为一系列线性的步骤。面向对象的一个本质特征就是抽象abstraction，抽象的概念被用于管理应用程序中的复杂性。开发中可以通过抽象，将应用划分为组件对象component的集合，而应用中的处理步骤就变成了组件对象之间的消息传递过程。</p>
+<p><strong>面向对象的三大特性</strong>：</p>
+<ol>
+<li><strong>封装</strong>：封装是将代码及其操作的数据绑定在一起的机制，java中封装的基础是类Class，类定义了对象的结构和行为（variable / method），类是一种逻辑结构而对象是一种物理实体（占用内存空间）。封装的目的是处理应用的复杂性。</li>
+<li><strong>继承</strong>：继承是一个对象获得另一个对象属性和方法的过程，通过继承，子类获得了父类所有属性和方法，同时子类只需要定义自己独有的属性和方法即可。继承最大的好处是提高了代码的复用性。</li>
+<li><strong>多态</strong>：多态的概念简而言之就是：超类（Class / Interface）的引用变量可以指向子类对象！如果超类中的某个方法被多个子类实现或重写，此时使用超类引用变量调用这个方法的时候，jvm会根据超类引用变量所指向的子类对象的实际类型来调用具体的方法，这就是<strong>动态方法调用</strong>！</li>
+</ol>
+<p><strong>第一个java程序</strong>：</p>
+<p>java源文件的扩展名称必须是.java格式的，源文件名称需要和类名称保持一致</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// class是java关键字，表示正在定义一个新的java类</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">// public是访问修饰符，用于控制类成员的可见性</span></span><br><span class="line">    <span class="hljs-comment">// static关键字表示不需要实例化类就能够调用该方法</span></span><br><span class="line">    <span class="hljs-comment">// main()方法表示这是程序的入口</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="hljs-string">"Hello Java!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="三-Java语法基础"><a href="#三-Java语法基础" class="headerlink" title="三. Java语法基础"></a>三. Java语法基础</h4><p><strong>数据类型 data type</strong>：</p>
+<p>java是强类型的语言，java中的每个变量都有一种类型。在java中的赋值，不管是显式地赋值还是在方法中传参，都要进行<strong>类型兼容性检查</strong>，如果不兼容将编译失败，这也是java安全性和健壮性的原因之一。</p>
+<p>java中的数据类型可分为基本类型和引用类型（对象），java中的基本类型可以分为四组：</p>
+<ul>
+<li><strong>整型</strong>：byte、short、int、long，它们都是用于表示整数的，长度分别是1byte，2byte，4byte，8byte，常用的是int和long类型，它们都是有符号的整数且数值范围严格定义，int是32位有符号整数，范围大概是正负21亿，long的范围是天文数据，大概几百万亿亿</li>
+<li><strong>浮点型</strong>：float和double类型，它们用于表示浮点数，常用是double类型，它是64位的</li>
+<li><strong>字符型</strong>：在java中用于存储字符的数据类型是char，java使用Unicode表示字符，所以java中char类型是16位的，这样有利于国际化</li>
+<li><strong>布尔型</strong>：boolean类型用于表示逻辑值，它只有true和false两个可能值</li>
+</ul>
+<p><strong>变量 variable</strong>：</p>
+<p>在java程序中，变量是最基本的存储单元，变量通过联合标识符、类型和可选的初始化器来定义。变量的基本声明形式<code>type identifier [ = value]</code>，type 指明变量的类型（int / boolean/ User / ModelAndView…），identifier是变量的名称，变量可以在声明的时候就初始化，也可以在后续动态初始化（赋值对象的引用）</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 声明了三个int类型的变量</span></span><br><span class="line"><span class="hljs-keyword">int</span> a, b, c;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 声明了一个double类型的变量，并初始化</span></span><br><span class="line"><span class="hljs-keyword">double</span> pi = <span class="hljs-number">3.1415</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 声明一个引用类型的变量，变量mv的类型是ModelAndView，并且已经初始化了</span></span><br><span class="line">ModelAndView mv = <span class="hljs-keyword">new</span> ModelAndView();</span><br></pre></td></tr></table></figure>
+<p>此外所有的变量都有<strong>作用域</strong>，作用域决定了变量的可见性和生存周期。java中的作用域是使用代码块即花括号来定义的，java中的作用域主要分为类作用域和方法作用域。类级作用域的变量对类中所有的方法都是可见的，而方法级作用域的变量（包括方法入参）只在本方法中可见。作用域也是嵌套的，外层作用域中声明的变量对内层作用域可见，反之不成立。</p>
+<p><strong>变量的生命周期被限制在作用域之内</strong>，当进入变量的作用域时创建变量，当离开它们的作用域时销毁变量，这也是为什么方法中的变量不会出现线程安全问题的原因！</p>
+<p><strong>数组 Array</strong>：</p>
+<p>数组是以通用的名称引用一组类型相同的变量（基本类型或引用类型），数组中的特定元素通过索引来访问。数组变量的声明形式<code>type var-name[size]</code>，type决定了数组中元素的类型，size指定数组的容量</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 声明并初始化一个数组变量，new运算符用于为数组申请内存空间</span></span><br><span class="line"><span class="hljs-comment">// 通过new分配的数组，根据数组的类型，其中的元素会被自动初始化为0、false、null</span></span><br><span class="line"><span class="hljs-comment">// 数组的索引是从0开始的，这是常识</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 声明并初始化一个数组变量</span></span><br><span class="line"><span class="hljs-keyword">int</span> month_days[] = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">12</span>];</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 另一种数组初始化方式</span></span><br><span class="line"><span class="hljs-keyword">double</span> nums[] = &#123;<span class="hljs-number">10.1</span>, <span class="hljs-number">11.2</span>, <span class="hljs-number">12.3</span>, <span class="hljs-number">13.4</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 这样写也合法</span></span><br><span class="line"><span class="hljs-keyword">double</span>[] nums = &#123;<span class="hljs-number">10.1</span>, <span class="hljs-number">11.2</span>, <span class="hljs-number">12.3</span>, <span class="hljs-number">13.4</span>&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="四-控制语句"><a href="#四-控制语句" class="headerlink" title="四. 控制语句"></a>四. 控制语句</h4><p>java中的程序控制语句分为：选择语句、迭代语句和跳转语句</p>
+<p><strong>选择语句</strong>：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// if-else，表达式为true执行statement1</span></span><br><span class="line"><span class="hljs-keyword">if</span> (condition)&#123;</span><br><span class="line">    <span class="hljs-comment">// statement1</span></span><br><span class="line">&#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">    <span class="hljs-comment">// statement2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// switch是java的多分支语句，将表达式的值与case语句中的每一个值进行比较，一旦匹配就执行这条case语句</span></span><br><span class="line"><span class="hljs-comment">// 如果常量值与case语句中的值匹配，就执行default语句</span></span><br><span class="line"><span class="hljs-comment">// break用于终止语句，当遇到break的时候执行过程将进入整个switch语句后面的第一行代码</span></span><br><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">6</span>; i++) &#123;</span><br><span class="line">    <span class="hljs-keyword">switch</span> (i) &#123;</span><br><span class="line">        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:</span><br><span class="line">            System.out.println(<span class="hljs-string">"i is zero"</span>);</span><br><span class="line">            <span class="hljs-keyword">break</span>;</span><br><span class="line">        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:</span><br><span class="line">            System.out.println(<span class="hljs-string">"i is one"</span>);</span><br><span class="line">            <span class="hljs-keyword">break</span>;</span><br><span class="line">        <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:</span><br><span class="line">            System.out.println(<span class="hljs-string">"i is two"</span>);</span><br><span class="line">            <span class="hljs-keyword">break</span>;</span><br><span class="line">        <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>:</span><br><span class="line">            System.out.println(<span class="hljs-string">"i is three"</span>);</span><br><span class="line">            <span class="hljs-keyword">break</span>;</span><br><span class="line">        <span class="hljs-keyword">default</span>:</span><br><span class="line">            System.out.println(<span class="hljs-string">"i is more than three"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>迭代语句</strong>：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// while循环，只要控制表达式为true就重复执行循环体，当为false时立即退出循环执行下一条语句</span></span><br><span class="line"><span class="hljs-keyword">int</span> n = <span class="hljs-number">10</span>;</span><br><span class="line"><span class="hljs-keyword">while</span> (n &gt; <span class="hljs-number">0</span>)&#123;</span><br><span class="line">    System.out.println(<span class="hljs-string">"tick "</span> + n);</span><br><span class="line">    n--;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 如果希望至少执行一次循环体，即使控制表达式一开始就是false，此时可以使用do-while循环</span></span><br><span class="line"><span class="hljs-keyword">int</span> n = <span class="hljs-number">10</span>;</span><br><span class="line"><span class="hljs-keyword">do</span> &#123;</span><br><span class="line">    System.out.println(<span class="hljs-string">"tick "</span> + n);</span><br><span class="line">    n--;</span><br><span class="line">&#125; <span class="hljs-keyword">while</span>(n &gt; <span class="hljs-number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 传统的for循环，可以在for循环的初始化部分声明变量，该变量的作用域局限于for循环</span></span><br><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> n = <span class="hljs-number">10</span>; n &gt; <span class="hljs-number">0</span>; n--)&#123;</span><br><span class="line">    System.out.println(<span class="hljs-string">"tick "</span> + n)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// for-each风格的循环被设计为以严格的顺序、从头到尾循环遍历一个对象集合</span></span><br><span class="line"><span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;</span><br><span class="line"><span class="hljs-keyword">int</span> nums[] = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> x : nums)&#123;</span><br><span class="line">    System.out.println(<span class="hljs-string">"Value is: "</span> + x);</span><br><span class="line">    sum += x;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-keyword">if</span> (x == <span class="hljs-number">5</span>)</span><br><span class="line">        <span class="hljs-keyword">break</span>;	<span class="hljs-comment">// 停止循环</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>跳转语句</strong>：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 使用break语句可以强制立即终止循环，绕过循环表达式和循环体中的剩余代码，并且程序会继续恢复到循环后</span></span><br><span class="line"><span class="hljs-comment">// 的下一条语句</span></span><br><span class="line"><span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;</span><br><span class="line"><span class="hljs-keyword">while</span> (i &lt; <span class="hljs-number">100</span>)&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (i == <span class="hljs-number">10</span>)</span><br><span class="line">        <span class="hljs-keyword">break</span>;   </span><br><span class="line">    System.out.println(<span class="hljs-string">"i: "</span> + i);</span><br><span class="line">    i++;</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(<span class="hljs-string">"Loop complete."</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 与break不同的是，continue是停止处理循环体中本次迭代剩余的代码而进入下一次循环</span></span><br><span class="line"><span class="hljs-comment">// continue语句导致程序的控制权被直接转移到控制循环的条件表达式中</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Continue</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;</span><br><span class="line">            System.out.print(i + <span class="hljs-string">" "</span>);</span><br><span class="line">            <span class="hljs-comment">// 如果i是奇数就换行</span></span><br><span class="line">            <span class="hljs-keyword">if</span> (i % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>)</span><br><span class="line">                <span class="hljs-keyword">continue</span>;</span><br><span class="line">            System.out.println(<span class="hljs-string">""</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 使用return语句显式地从方法中返回，return语句导致程序的执行控制权从方法转移到方法的调用者</span></span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        <hr style="height:1px;margin:1rem 0">
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/tags/Java/">Java</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/10/11/java/java-base-oop/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Java基础笔记：面向对象</span>
+            </a>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="http://znker-blog.oss-cn-hangzhou.aliyuncs.com/hexo-img/avatar.jpg" alt="Znker">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        Znker
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Java Developer
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Hangzhou, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        10
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        3
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        6
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/codeznker" target="_blank">
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="WeiBo" href="https://weibo.com/u/5764981017">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="WeChat" href="http://znker-blog.oss-cn-hangzhou.aliyuncs.com/hexo-img/WeChat-430x610.jpg">
+                
+                <i class="fab fa-weixin"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="http://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="Java基础笔记：基本语法" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 Znker&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="codeznker" href="https://github.com/codeznker">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
